@@ -17,21 +17,21 @@ namespace EI_Task.Services
             _repository = repository;
         }
 
-        public async Task<User?> GetAsync(int id)
+        public async Task<bool> RegisterAsync(int id)
         {
             if (_repository.IsNull)
             {
-                return null;
+                return false;
             }
 
             var entity = await _repository.FindAsync(id);
             if (entity == null)
             {
 
-                return null;
+                return true;
             }
 
-            return entity;
+            return true;
         }
 
 

@@ -19,9 +19,11 @@ namespace EI_Task.Data
 
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<User> Users { get; set; }
+
 
     }
 }

@@ -8,11 +8,11 @@ namespace EI_Task
     public partial class LoginForm : Form
     {
         private readonly ILibraryService<Book> _libraryService;
-        private readonly ILoginService _loginService;
+        private readonly IAccountService _loginService;
 
 
         public LoginForm(ILibraryService<Book> libraryService
-                    , ILoginService loginService
+                    , IAccountService loginService
             )
         {
             _libraryService = libraryService;
@@ -27,7 +27,7 @@ namespace EI_Task
             label1TextChange();
 
         }
-        private async void label1TextChange()
+        private async void label1TextChange() //testing purpose 
         {
             var book = await _libraryService.GetAsync(1);
             if (book != null)
@@ -39,10 +39,10 @@ namespace EI_Task
 
         private async void LoginSubmitButton_Click(object sender, EventArgs e)
         {
-            string email = TextBoxEmail.Text;  // Retrieve the email from the text box
-            string password = TextBoxPW.Text;  // Retrieve the password from the text box
+            string email = TextBoxEmail.Text.ToLower();
+            string password = TextBoxPW.Text.ToLower();  
 
-            int userId = await _loginService.LoginAsync(email, password);  // Call the LoginAsync method
+            int userId = await _loginService.LoginAsync(email, password);  
 
             if (userId != -1)
             {

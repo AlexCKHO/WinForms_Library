@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EI_Task.Services
 {
-    public interface ILoginService
+    public interface IAccountService
     {
         Task<int> LoginAsync(string email, string password);
 
