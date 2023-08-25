@@ -1,6 +1,6 @@
 ﻿namespace EI_Task
 {
-    partial class Form1
+    partial class LoginForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -32,38 +32,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            button1 = new Button();
+            TextBoxEmail = new TextBox();
+            TextBoxPW = new TextBox();
+            LoginSubmitButton = new Button();
             label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
-            // textBox1
+            // TextBoxEmail
             // 
-            textBox1.Location = new Point(275, 158);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(216, 23);
-            textBox1.TabIndex = 0;
+            TextBoxEmail.Location = new Point(275, 158);
+            TextBoxEmail.Name = "TextBoxEmail";
+            TextBoxEmail.Size = new Size(216, 23);
+            TextBoxEmail.TabIndex = 0;
             // 
-            // textBox2
+            // TextBoxPW
             // 
-            textBox2.BackColor = SystemColors.ScrollBar;
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Location = new Point(275, 219);
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(216, 23);
-            textBox2.TabIndex = 3;
+            TextBoxPW.BackColor = SystemColors.ScrollBar;
+            TextBoxPW.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxPW.Location = new Point(275, 219);
+            TextBoxPW.Name = "TextBoxPW";
+            TextBoxPW.PasswordChar = '*';
+            TextBoxPW.Size = new Size(216, 23);
+            TextBoxPW.TabIndex = 3;
             // 
-            // button1
+            // LoginSubmitButton
             // 
-            button1.Location = new Point(346, 291);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            LoginSubmitButton.Location = new Point(340, 289);
+            LoginSubmitButton.Name = "LoginSubmitButton";
+            LoginSubmitButton.Size = new Size(75, 23);
+            LoginSubmitButton.TabIndex = 2;
+            LoginSubmitButton.Text = "Submit";
+            LoginSubmitButton.UseVisualStyleBackColor = true;
+            LoginSubmitButton.Click += LoginSubmitButton_Click;
             // 
             // label1
             // 
@@ -74,17 +75,28 @@
             label1.TabIndex = 4;
             label1.Text = "label1";
             // 
-            // Form1
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(453, 91);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 5;
+            label2.Text = "label2";
+            // 
+            // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Name = "Form1";
-            Text = "Form1";
+            Controls.Add(LoginSubmitButton);
+            Controls.Add(TextBoxPW);
+            Controls.Add(TextBoxEmail);
+            Name = "LoginForm";
+            RightToLeftLayout = true;
+            Text = "Please Login";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -92,9 +104,10 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Button button1;
+        private TextBox TextBoxEmail;
+        private TextBox TextBoxPW;
+        private Button LoginSubmitButton;
         private Label label1;
+        private Label label2;
     }
 }

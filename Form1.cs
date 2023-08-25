@@ -5,18 +5,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EI_Task
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
         private readonly ILibraryService<Book> _libraryService;
-   //     private readonly ILibraryService<Branch> _branchService;
+        private readonly ILoginService _loginService;
 
-        public Form1(ILibraryService<Book> libraryService
-           // , ILibraryService<Branch> branchService
+
+        public LoginForm(ILibraryService<Book> libraryService
+                    , ILoginService loginService
             )
         {
             _libraryService = libraryService;
-        //    _branchService = branchService;
+            _loginService = loginService;
+            //    _branchService = branchService;
             InitializeComponent();
+            _loginService = loginService;
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -34,10 +37,26 @@ namespace EI_Task
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void LoginSubmitButton_Click(object sender, EventArgs e)
         {
+            string email = TextBoxEmail.Text;  // Retrieve the email from the text box
+            string password = TextBoxPW.Text;  // Retrieve the password from the text box
 
+            int userId = await _loginService.LoginAsync(email, password);  // Call the LoginAsync method
+
+            if (userId != -1)
+            {
+                Form2 form2 = new Form2(userId);
+                this.Hide();
+                form2.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                label2.Text = "Login Attempt Failed";
+            }
         }
+
 
     }
 }

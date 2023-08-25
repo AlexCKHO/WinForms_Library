@@ -28,7 +28,7 @@ namespace EI_Task
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+            Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
@@ -40,7 +40,7 @@ namespace EI_Task
         {
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
-                    services.AddTransient<Form1>();
+                    services.AddTransient<LoginForm>();
                     services.AddDbContext<LibraryDbContext>(
                         opt => opt.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=EI_Task;Trusted_Connection=True;")
                         );
@@ -48,6 +48,8 @@ namespace EI_Task
                     services.AddScoped(typeof(ILibraryRepository<>), typeof(LibraryRepository<>));
                     services.AddScoped(typeof(ILibraryService<>), typeof(LibraryService<>));
                     services.AddScoped<ILibraryService<Book>, BooksService>();
+                    services.AddScoped<ILoginService, LoginService>();
+                   
 
                 });
         }
