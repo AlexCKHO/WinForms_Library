@@ -15,23 +15,30 @@ namespace EI_Task
     public partial class MainForm : Form
     {
         private readonly ILibraryService<Book> _booksService;
-        private readonly ILibraryService<Branch> _branchesService;
+        private readonly IUserManagerService _userManagerService;
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         private string _originalValue;
-        public MainForm(ILibraryService<Book> booksService, ILibraryService<Branch> branchesService)
+        public MainForm(ILibraryService<Book> booksService, IUserManagerService userManagerService)
         {
             _booksService = booksService;
-            _branchesService = branchesService;
+            _userManagerService = userManagerService;
             InitializeComponent();
-            GetListOfBook();
 
         }
 
-/*        private async Task GetBranchNameAndId()
+        private async void MainForm_Load(object sender, EventArgs e)
         {
-            _branchNameAndId = await _branchesService.GetBranchNameAndId();
+             GetListOfBook();
+            await GetBranchNameAndId();
 
-        }*/
+        }
+
+
+        private async Task GetBranchNameAndId()
+        {
+            _branchNameAndId = await _userManagerService.GetBranchNameAndId();
+
+        }
         private async void GetListOfBook()
         {
             var books = await _booksService.GetAllAsync();

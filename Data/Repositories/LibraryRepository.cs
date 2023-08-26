@@ -39,7 +39,7 @@ namespace EI_Task.Data.Repositories
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return  await _dbSet.ToListAsync();
         }
 
         public virtual void Remove(T entity)

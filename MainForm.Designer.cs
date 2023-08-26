@@ -156,6 +156,7 @@
             Text = "Main Page";
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();
+            Load += MainForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

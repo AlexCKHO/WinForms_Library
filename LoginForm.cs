@@ -9,7 +9,7 @@ namespace EI_Task
     public partial class LoginForm : Form
     {
         private readonly ILibraryService<Book> _booksService;
-        private readonly ILibraryService<Branch> _branchesService;
+
         private readonly IAccountService _loginService;
         private readonly IUserManagerService _userManagerService;
 
@@ -17,12 +17,10 @@ namespace EI_Task
         public LoginForm(ILibraryService<Book> booksService
                     , IAccountService loginService
                     , IUserManagerService userManagerService
-                    ,ILibraryService<Branch> branchesService
 
             )
         {
             _booksService = booksService;
-            _branchesService = branchesService;
             _loginService = loginService;
             _userManagerService = userManagerService;
             InitializeComponent();
@@ -47,7 +45,7 @@ namespace EI_Task
 
             if (userId != -1)
             {
-                MainForm mainForm = new MainForm(_booksService,_branchesService);
+                MainForm mainForm = new MainForm(_booksService, _userManagerService);
                 this.Hide();
                 mainForm.ShowDialog();
                 this.Close();

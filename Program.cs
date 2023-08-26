@@ -49,7 +49,7 @@ namespace EI_Task
         static IHostBuilder CreateHostBuilder()
         {
 
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=EI_Task;Trusted_Connection=True;";
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=EI_Task;Trusted_Connection=True;MultipleActiveResultSets=true";
 
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
