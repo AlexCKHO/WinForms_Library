@@ -36,15 +36,23 @@ namespace EI_Task
 
         private async void SubmitButton_Click(object sender, EventArgs e)
         {
+            if (EntryError)
+            {
+                StatusLabel.ForeColor = Color.Red;
+                StatusLabel.Text = "Please fill in correct information";
+
+
+            }
 
             if (!EntryError)
             {
 
                 var result = await CreateUser();
-
                 if (result)
                 {
                     ResetAllTextBoxes();
+                    StatusLabel.ForeColor = Color.Green;
+                    StatusLabel.Text = "Successfully Registered";
                 }
             }
 
@@ -72,6 +80,8 @@ namespace EI_Task
 
         private void NameTextBox_Validating(object sender, CancelEventArgs e)
         {
+            StatusLabel.Text = "";
+
             if (string.IsNullOrEmpty(NameTextBox.Text))
             {
                 EntryError = true;
@@ -99,7 +109,8 @@ namespace EI_Task
             EmailTextBox.Text = String.Empty;
             PasswordTextBox.Text = String.Empty;
             AddressTextBox.Text = String.Empty;
-            ListOfBranch.SelectedIndex =0;
+            ListOfBranch.SelectedIndex = 0;
+            EntryError = true;
         }
 
 
@@ -135,7 +146,7 @@ namespace EI_Task
         {
             string password = PasswordTextBox.Text;
 
-             if (!Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d\d)(?=.*[@$!%*#?&.])[^ ]{7,}$"))
+            if (!Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d\d)(?=.*[@$!%*#?&.])[^ ]{7,}$"))
             {
                 EntryError = true;
                 errorProvider.SetError(PasswordTextBox, "Password must not contain spaces, and should have at least 7 characters, 2 numbers, and a special character!");

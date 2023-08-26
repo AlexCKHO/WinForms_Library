@@ -46,6 +46,7 @@
             BackToLoginButton = new Button();
             errorProvider = new ErrorProvider(components);
             ListOfBranch = new ComboBox();
+            StatusLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -206,11 +207,22 @@
             ListOfBranch.SelectedIndexChanged += ListOfBranch_SelectedIndexChanged;
             ListOfBranch.Validating += ListOfBranch_Validating;
             // 
+            // StatusLabel
+            // 
+            StatusLabel.AutoSize = true;
+            StatusLabel.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            StatusLabel.Location = new Point(397, 25);
+            StatusLabel.Name = "StatusLabel";
+            StatusLabel.Size = new Size(0, 32);
+            StatusLabel.TabIndex = 17;
+            StatusLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
             // SignUpForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(StatusLabel);
             Controls.Add(ListOfBranch);
             Controls.Add(BackToLoginButton);
             Controls.Add(YearTextBox);
@@ -255,5 +267,6 @@
         private Button BackToLoginButton;
         private ErrorProvider errorProvider;
         private ComboBox ListOfBranch;
+        private Label StatusLabel;
     }
 }
