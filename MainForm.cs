@@ -92,7 +92,10 @@ namespace EI_Task
             int rowIndex = e.RowIndex;
             int colIndex = e.ColumnIndex;
 
-            _originalValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value.ToString();
+            if(rowIndex != -1 )
+            {
+                _originalValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value.ToString();
+            }
         }
 
         private async void BookDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -219,11 +222,6 @@ namespace EI_Task
 
                 errorProvider.SetError(NameTextBox, "Please enter book name !");
             }
-            else if (isExistBookName(NameTextBox.Text))
-            {
-                errorProvider.SetError(NameTextBox, "Book with the same name already exists!");
-
-            }
             else
             {
                 errorProvider.SetError(NameTextBox, null);
@@ -251,19 +249,6 @@ namespace EI_Task
             }
         }
 
-        private bool isExistBookName(string bookName)
-        {
-            foreach (var item in _allBooks)
-            {
-                if (item.Name == bookName)
-                {
-                    return true;
-                }
-
-            }
-
-            return false;
-        }
 
         private bool ValidatePublishedYear(int year)
         {
