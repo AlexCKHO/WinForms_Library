@@ -32,7 +32,6 @@
             NameTextBox = new TextBox();
             DateTextBox = new TextBox();
             EmailTextBox = new TextBox();
-            PMBTextBox = new TextBox();
             PasswordTextBox = new TextBox();
             AddressTextBox = new TextBox();
             NameLabel = new Label();
@@ -52,7 +51,7 @@
             // 
             // NameTextBox
             // 
-            NameTextBox.Location = new Point(307, 80);
+            NameTextBox.Location = new Point(154, 97);
             NameTextBox.Name = "NameTextBox";
             NameTextBox.Size = new Size(208, 23);
             NameTextBox.TabIndex = 0;
@@ -60,46 +59,43 @@
             // 
             // DateTextBox
             // 
-            DateTextBox.Location = new Point(307, 125);
+            DateTextBox.Location = new Point(154, 142);
             DateTextBox.Name = "DateTextBox";
             DateTextBox.PlaceholderText = "DD";
             DateTextBox.Size = new Size(56, 23);
             DateTextBox.TabIndex = 1;
+            DateTextBox.Validating += DateTextBox_Validating;
             // 
             // EmailTextBox
             // 
-            EmailTextBox.Location = new Point(307, 169);
+            EmailTextBox.Location = new Point(154, 186);
             EmailTextBox.Name = "EmailTextBox";
             EmailTextBox.Size = new Size(208, 23);
             EmailTextBox.TabIndex = 2;
-            // 
-            // PMBTextBox
-            // 
-            PMBTextBox.Location = new Point(307, 303);
-            PMBTextBox.Name = "PMBTextBox";
-            PMBTextBox.Size = new Size(208, 23);
-            PMBTextBox.TabIndex = 5;
+            EmailTextBox.Validating += EmailTextBox_Validating;
             // 
             // PasswordTextBox
             // 
-            PasswordTextBox.Location = new Point(307, 259);
+            PasswordTextBox.Location = new Point(154, 232);
             PasswordTextBox.Name = "PasswordTextBox";
             PasswordTextBox.PasswordChar = '*';
             PasswordTextBox.Size = new Size(208, 23);
             PasswordTextBox.TabIndex = 4;
+            PasswordTextBox.Validating += PasswordTextBox_Validating;
             // 
             // AddressTextBox
             // 
-            AddressTextBox.Location = new Point(307, 214);
+            AddressTextBox.Location = new Point(521, 95);
             AddressTextBox.Name = "AddressTextBox";
             AddressTextBox.Size = new Size(208, 23);
             AddressTextBox.TabIndex = 3;
+            AddressTextBox.Validating += AddressTextBox_Validating;
             // 
             // NameLabel
             // 
             NameLabel.AutoSize = true;
             NameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            NameLabel.Location = new Point(248, 80);
+            NameLabel.Location = new Point(95, 97);
             NameLabel.Name = "NameLabel";
             NameLabel.Size = new Size(59, 21);
             NameLabel.TabIndex = 6;
@@ -109,7 +105,7 @@
             // 
             AddressLable.AutoSize = true;
             AddressLable.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddressLable.Location = new Point(234, 214);
+            AddressLable.Location = new Point(448, 95);
             AddressLable.Name = "AddressLable";
             AddressLable.Size = new Size(73, 21);
             AddressLable.TabIndex = 7;
@@ -119,7 +115,7 @@
             // 
             EmailLabel.AutoSize = true;
             EmailLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            EmailLabel.Location = new Point(248, 169);
+            EmailLabel.Location = new Point(95, 186);
             EmailLabel.Name = "EmailLabel";
             EmailLabel.Size = new Size(59, 21);
             EmailLabel.TabIndex = 8;
@@ -129,7 +125,7 @@
             // 
             DOBLabel.AutoSize = true;
             DOBLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            DOBLabel.Location = new Point(203, 125);
+            DOBLabel.Location = new Point(50, 142);
             DOBLabel.Name = "DOBLabel";
             DOBLabel.Size = new Size(104, 21);
             DOBLabel.TabIndex = 9;
@@ -139,17 +135,17 @@
             // 
             PMBLabel.AutoSize = true;
             PMBLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PMBLabel.Location = new Point(83, 301);
+            PMBLabel.Location = new Point(431, 182);
             PMBLabel.Name = "PMBLabel";
-            PMBLabel.Size = new Size(224, 21);
+            PMBLabel.Size = new Size(144, 21);
             PMBLabel.TabIndex = 10;
-            PMBLabel.Text = "Primary Memebership Branch :";
+            PMBLabel.Text = "Branch to Register :";
             // 
             // PasswordLable
             // 
             PasswordLable.AutoSize = true;
             PasswordLable.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PasswordLable.Location = new Point(224, 259);
+            PasswordLable.Location = new Point(71, 232);
             PasswordLable.Name = "PasswordLable";
             PasswordLable.Size = new Size(83, 21);
             PasswordLable.TabIndex = 11;
@@ -157,7 +153,7 @@
             // 
             // SubmitButton
             // 
-            SubmitButton.Location = new Point(374, 359);
+            SubmitButton.Location = new Point(355, 334);
             SubmitButton.Name = "SubmitButton";
             SubmitButton.Size = new Size(75, 23);
             SubmitButton.TabIndex = 12;
@@ -167,19 +163,21 @@
             // 
             // MonthTextBox
             // 
-            MonthTextBox.Location = new Point(384, 125);
+            MonthTextBox.Location = new Point(231, 142);
             MonthTextBox.Name = "MonthTextBox";
             MonthTextBox.PlaceholderText = "MM";
             MonthTextBox.Size = new Size(56, 23);
             MonthTextBox.TabIndex = 13;
+            MonthTextBox.Validating += MonthTextBox_Validating;
             // 
             // YearTextBox
             // 
-            YearTextBox.Location = new Point(459, 125);
+            YearTextBox.Location = new Point(306, 142);
             YearTextBox.Name = "YearTextBox";
             YearTextBox.PlaceholderText = "YYYY";
             YearTextBox.Size = new Size(56, 23);
             YearTextBox.TabIndex = 14;
+            YearTextBox.Validating += YearTextBox_Validating;
             // 
             // BackToLoginButton
             // 
@@ -201,10 +199,12 @@
             ListOfBranch.DropDownStyle = ComboBoxStyle.DropDownList;
             ListOfBranch.FormattingEnabled = true;
             ListOfBranch.Items.AddRange(new object[] { "HereOne", "HereTwo" });
-            ListOfBranch.Location = new Point(633, 169);
+            ListOfBranch.Location = new Point(598, 182);
             ListOfBranch.Name = "ListOfBranch";
             ListOfBranch.Size = new Size(121, 23);
             ListOfBranch.TabIndex = 16;
+            ListOfBranch.SelectedIndexChanged += ListOfBranch_SelectedIndexChanged;
+            ListOfBranch.Validating += ListOfBranch_Validating;
             // 
             // SignUpForm
             // 
@@ -222,7 +222,6 @@
             Controls.Add(EmailLabel);
             Controls.Add(AddressLable);
             Controls.Add(NameLabel);
-            Controls.Add(PMBTextBox);
             Controls.Add(PasswordTextBox);
             Controls.Add(AddressTextBox);
             Controls.Add(EmailTextBox);
@@ -242,7 +241,6 @@
         private TextBox NameTextBox;
         private TextBox DateTextBox;
         private TextBox EmailTextBox;
-        private TextBox PMBTextBox;
         private TextBox PasswordTextBox;
         private TextBox AddressTextBox;
         private Label PasswordLable;
