@@ -32,7 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            label1 = new Label();
             BookDataGrid = new DataGridView();
             BookId = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -42,18 +41,18 @@
             btnDelete = new DataGridViewButtonColumn();
             bookBindingSource = new BindingSource(components);
             ListOfBranch = new ComboBox();
+            NameTextBox = new TextBox();
+            PublishYearTextBox = new TextBox();
+            AvailableCheckBox = new CheckBox();
+            LocationList = new ComboBox();
+            AddBooksButton = new Button();
+            errorProvider = new ErrorProvider(components);
+            StatusLabel = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(667, 39);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
             // 
             // BookDataGrid
             // 
@@ -83,7 +82,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             BookDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             BookDataGrid.EnableHeadersVisualStyles = false;
-            BookDataGrid.Location = new Point(94, 87);
+            BookDataGrid.Location = new Point(216, 141);
             BookDataGrid.Name = "BookDataGrid";
             BookDataGrid.RowTemplate.Height = 25;
             BookDataGrid.Size = new Size(546, 506);
@@ -91,6 +90,7 @@
             BookDataGrid.CellClick += BookDataGrid_CellClick;
             BookDataGrid.CellContentClick += BookDataGrid_CellContentClick;
             BookDataGrid.CellEndEdit += BookDataGrid_CellEndEdit;
+            BookDataGrid.DataError += BookDataGrid_DataError;
             // 
             // BookId
             // 
@@ -138,33 +138,107 @@
             // ListOfBranch
             // 
             ListOfBranch.FormattingEnabled = true;
-            ListOfBranch.Location = new Point(759, 87);
+            ListOfBranch.Location = new Point(53, 165);
             ListOfBranch.Name = "ListOfBranch";
             ListOfBranch.Size = new Size(121, 23);
             ListOfBranch.TabIndex = 2;
             ListOfBranch.SelectedValueChanged += ListOfBranch_SelectedValueChanged;
             // 
+            // NameTextBox
+            // 
+            NameTextBox.Location = new Point(237, 88);
+            NameTextBox.Name = "NameTextBox";
+            NameTextBox.PlaceholderText = "Name";
+            NameTextBox.Size = new Size(89, 23);
+            NameTextBox.TabIndex = 3;
+            NameTextBox.Validating += NameTextBox_Validating;
+            // 
+            // PublishYearTextBox
+            // 
+            PublishYearTextBox.Location = new Point(362, 88);
+            PublishYearTextBox.Name = "PublishYearTextBox";
+            PublishYearTextBox.PlaceholderText = "Publish Year";
+            PublishYearTextBox.Size = new Size(89, 23);
+            PublishYearTextBox.TabIndex = 4;
+            PublishYearTextBox.Validating += PublishYearTextBox_Validating;
+            // 
+            // AvailableCheckBox
+            // 
+            AvailableCheckBox.AutoSize = true;
+            AvailableCheckBox.Location = new Point(472, 90);
+            AvailableCheckBox.Name = "AvailableCheckBox";
+            AvailableCheckBox.Size = new Size(74, 19);
+            AvailableCheckBox.TabIndex = 5;
+            AvailableCheckBox.Text = "Available";
+            AvailableCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // LocationList
+            // 
+            LocationList.FormattingEnabled = true;
+            LocationList.Location = new Point(552, 88);
+            LocationList.Name = "LocationList";
+            LocationList.Size = new Size(89, 23);
+            LocationList.TabIndex = 6;
+            // 
+            // AddBooksButton
+            // 
+            AddBooksButton.Location = new Point(671, 88);
+            AddBooksButton.Name = "AddBooksButton";
+            AddBooksButton.Size = new Size(75, 23);
+            AddBooksButton.TabIndex = 7;
+            AddBooksButton.Text = "Add Book";
+            AddBooksButton.UseVisualStyleBackColor = true;
+            AddBooksButton.Click += AddBooksButton_Click;
+            // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
+            // StatusLabel
+            // 
+            StatusLabel.AutoSize = true;
+            StatusLabel.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            StatusLabel.Location = new Point(254, 25);
+            StatusLabel.Name = "StatusLabel";
+            StatusLabel.Size = new Size(0, 40);
+            StatusLabel.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(42, 131);
+            label1.Name = "label1";
+            label1.Size = new Size(142, 19);
+            label1.TabIndex = 9;
+            label1.Text = "Filter Book By Branch";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1235, 726);
+            ClientSize = new Size(793, 686);
+            Controls.Add(label1);
+            Controls.Add(StatusLabel);
+            Controls.Add(AddBooksButton);
+            Controls.Add(LocationList);
+            Controls.Add(AvailableCheckBox);
+            Controls.Add(PublishYearTextBox);
+            Controls.Add(NameTextBox);
             Controls.Add(ListOfBranch);
             Controls.Add(BookDataGrid);
-            Controls.Add(label1);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main Page";
             Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
         private DataGridView BookDataGrid;
         private BindingSource bookBindingSource;
         private ComboBox ListOfBranch;
@@ -174,5 +248,13 @@
         private DataGridViewCheckBoxColumn availabilityDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn BranchId;
         private DataGridViewButtonColumn btnDelete;
+        private TextBox NameTextBox;
+        private TextBox PublishYearTextBox;
+        private CheckBox AvailableCheckBox;
+        private ComboBox LocationList;
+        private Button AddBooksButton;
+        private ErrorProvider errorProvider;
+        private Label StatusLabel;
+        private Label label1;
     }
 }

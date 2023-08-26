@@ -8,7 +8,6 @@ namespace EI_Task
     public partial class SignUpForm : Form
     {
         private readonly IUserManagerService _userManagerService;
-        private bool _brandNew = true;
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         public SignUpForm(IUserManagerService userManagerService)
         {
@@ -26,7 +25,7 @@ namespace EI_Task
 
         private async void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (AreAllInputsValid() && !_brandNew)
+            if (AreAllInputsValid())
             {
                 var result = await CreateUser();
                 if (result)
@@ -34,7 +33,6 @@ namespace EI_Task
                     ResetAllTextBoxes();
                     StatusLabel.ForeColor = Color.Green;
                     StatusLabel.Text = "Successfully Registered";
-                    _brandNew = true;
                 }
             }
             else
@@ -175,8 +173,6 @@ namespace EI_Task
         private void DateTextBox_Validating(object sender, CancelEventArgs e)
         {
             StatusLabel.Text = "";
-            _brandNew = false;
-
             ValidateDate();
         }
 
@@ -247,7 +243,7 @@ namespace EI_Task
             {
                 if (control is System.Windows.Forms.TextBox || control is System.Windows.Forms.ComboBox)
                 {
-                    if (!String.IsNullOrEmpty(control.Text))
+                    if (String.IsNullOrEmpty(control.Text))
                     {
                         return false;
                     }

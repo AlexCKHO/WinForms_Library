@@ -27,16 +27,18 @@ namespace EI_Task
 
         }
 
-        private async void MainForm_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             GetListOfBook();
-            SetDict();
+            SetBranchDropList();
         }
 
-        private async void SetDict()
+        private async void SetBranchDropList()
         {
             await GetBranchNameAndId();
             ListOfBranch.Items.Clear();
+            LocationList.Items.Clear();
+            LocationList.Items.AddRange(_branchNameAndId.Keys.ToArray());
             ListOfBranch.Items.Add("All");
             ListOfBranch.Items.AddRange(_branchNameAndId.Keys.ToArray());
         }
@@ -54,7 +56,7 @@ namespace EI_Task
 
         private void ListOfBranch_SelectedValueChanged(object sender, EventArgs e)
         {
-            if(ListOfBranch.Text == "All")
+            if (ListOfBranch.Text == "All")
             {
                 BookDataGrid.DataSource = _allBooks;
             }
@@ -64,8 +66,9 @@ namespace EI_Task
                 var filteredBooks = _allBooks.Where(book => book.BranchId == branchId).ToList();
                 BookDataGrid.DataSource = filteredBooks;
             }
-            
+
         }
+
 
         private async void BookDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,6 +106,13 @@ namespace EI_Task
 
             // Get the new value
             object newValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value;
+
+            if (newValue == null)
+            {
+                MessageBox.Show("Invalid input. The field cannot be empty");
+                BookDataGrid.Rows[rowIndex].Cells[colIndex].Value = _originalValue;
+                return;
+            }
 
             // Find the corresponding book from the data source
             Book editedBook = await _booksService.GetAsync(bookId);
@@ -152,6 +162,108 @@ namespace EI_Task
             await _booksService.UpdateAsync(bookId, editedBook);
         }
 
+        private async void AddBooksButton_Click(object sender, EventArgs e)
+        {
+            if (AreAllInputsValid())
+            {
+                var result = await CreateBook();
+                if (result)
+                {
+
+                    StatusLabel.ForeColor = Color.Green;
+                    StatusLabel.Text = "Successfully Added New Book";
+                    ResetAllTextBoxes();
+                    GetListOfBook();
+                    ListOfBranch.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                StatusLabel.ForeColor = Color.Red;
+                StatusLabel.Text = "Please fill in correct information";
+            }
+        }
+
+        private void ResetAllTextBoxes()
+        {
+            NameTextBox.Text = String.Empty;
+            PublishYearTextBox.Text = String.Empty;
+            LocationList.SelectedIndex = 0;
+        }
+
+
+
+        private async Task<bool> CreateBook()
+        {
+            var book = new Book();
+            book.Name = NameTextBox.Text;
+            book.PublishedYear = int.Parse(PublishYearTextBox.Text);
+            book.Availability = AvailableCheckBox.Checked;
+            book.BranchId = _branchNameAndId.FirstOrDefault(x => x.Key == LocationList.Text).Value;
+
+            return await _booksService.CreateAsync(book);
+
+        }
+
+        private void BookDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Invalid input. The field cannot be empty or space only");
+        }
+
+        private void NameTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            StatusLabel.Text = "";
+
+            if (string.IsNullOrEmpty(NameTextBox.Text) || string.IsNullOrWhiteSpace(NameTextBox.Text))
+            {
+
+                errorProvider.SetError(NameTextBox, "Please enter book name !");
+            }
+            else if (isExistBookName(NameTextBox.Text))
+            {
+                errorProvider.SetError(NameTextBox, "Book with the same name already exists!");
+
+            }
+            else
+            {
+                errorProvider.SetError(NameTextBox, null);
+            }
+        }
+
+
+
+
+        private void PublishYearTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(PublishYearTextBox.Text) || string.IsNullOrWhiteSpace(PublishYearTextBox.Text))
+            {
+
+                errorProvider.SetError(PublishYearTextBox, "Please enter Year !");
+            }
+            else if (!ValidatePublishedYear(int.Parse(PublishYearTextBox.Text)))
+            {
+                errorProvider.SetError(PublishYearTextBox, "Invalid year. Please enter a year between 1 and the current year.");
+
+            }
+            else
+            {
+                errorProvider.SetError(PublishYearTextBox, null);
+            }
+        }
+
+        private bool isExistBookName(string bookName)
+        {
+            foreach (var item in _allBooks)
+            {
+                if (item.Name == bookName)
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
 
         private bool ValidatePublishedYear(int year)
         {
@@ -166,6 +278,26 @@ namespace EI_Task
             }
         }
 
-        
+        private bool AreAllInputsValid()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is System.Windows.Forms.TextBox || control is System.Windows.Forms.ComboBox && control.Name != "ListOfBranch")
+                {
+                    if (String.IsNullOrEmpty(control.Text))
+                    {
+                        return false;
+                    }
+                    string errorMessage = errorProvider.GetError(control);
+                    if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
     }
 }
