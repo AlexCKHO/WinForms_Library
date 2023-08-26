@@ -10,16 +10,19 @@ namespace EI_Task
     {
         private readonly ILibraryService<Book> _libraryService;
         private readonly IAccountService _loginService;
+        private readonly IUserManagerService _userManagerService;
 
 
         public LoginForm(ILibraryService<Book> libraryService
                     , IAccountService loginService
+                    , IUserManagerService userManagerService
             )
         {
             _libraryService = libraryService;
             _loginService = loginService;
-            //    _branchService = branchService;
+            _userManagerService = userManagerService;
             InitializeComponent();
+            
         }
 
 
@@ -60,7 +63,7 @@ namespace EI_Task
 
         private void SignUpFormButton_Click(object sender, EventArgs e)
         {
-            SignUpForm signUpForm = new SignUpForm();
+            SignUpForm signUpForm = new SignUpForm(_userManagerService);
             this.Hide();
             signUpForm.ShowDialog();
             this.Show();

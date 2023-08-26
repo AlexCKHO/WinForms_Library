@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             NameTextBox = new TextBox();
             DateTextBox = new TextBox();
             EmailTextBox = new TextBox();
             PMBTextBox = new TextBox();
             PasswordTextBox = new TextBox();
             AddressTextBox = new TextBox();
-            errorProvider1 = new ErrorProvider(components);
             NameLabel = new Label();
             AddressLable = new Label();
             EmailLabel = new Label();
@@ -46,7 +44,6 @@
             MonthTextBox = new TextBox();
             YearTextBox = new TextBox();
             BackToLoginButton = new Button();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // NameTextBox
@@ -90,10 +87,6 @@
             AddressTextBox.Name = "AddressTextBox";
             AddressTextBox.Size = new Size(208, 23);
             AddressTextBox.TabIndex = 3;
-            // 
-            // errorProvider1
-            // 
-            errorProvider1.ContainerControl = this;
             // 
             // NameLabel
             // 
@@ -215,7 +208,6 @@
             Name = "SignUpForm";
             Text = "SignUpForm";
             Load += SignUpForm_Load;
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -228,7 +220,6 @@
         private TextBox PMBTextBox;
         private TextBox PasswordTextBox;
         private TextBox AddressTextBox;
-        private ErrorProvider errorProvider1;
         private Label PasswordLable;
         private Label PMBLabel;
         private Label DOBLabel;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EI_Task.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +13,10 @@ namespace EI_Task
 {
     public partial class SignUpForm : Form
     {
-        public SignUpForm()
+        private readonly IUserManagerService _userManagerService;
+        public SignUpForm(IUserManagerService userManagerService)
         {
+            _userManagerService = userManagerService;
             InitializeComponent();
         }
 
@@ -25,7 +28,13 @@ namespace EI_Task
         private void SubmitButton_Click(object sender, EventArgs e)
         {
             string name = NameTextBox.Text;
-            DateTime DOB = DateTime.Parse($"{YearTextBox.Text}-{MonthTextBox.Text}-{DateTextBox.Text} TimeSpan.Zero");
+            DateTime DOB = DateTime.Parse($"{YearTextBox.Text}-{MonthTextBox.Text}-{DateTextBox.Text}");
+            string email = EmailTextBox.Text;
+            string password = PasswordTextBox.Text;
+            string address = AddressTextBox.Text;
+            int branchId = int.Parse(PMBTextBox.Text);
+
+            _userManagerService.CreateUserAndAccount(name, DOB, email, address, branchId, password);
 
 
         }
