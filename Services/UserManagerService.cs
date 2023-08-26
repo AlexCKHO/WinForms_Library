@@ -35,7 +35,7 @@ namespace EI_Task.Services
             user.Name = name;
             user.Email = email;
             user.DateOfBirth = DOB;
-            user.PrimaryMembershipBranchId = PMBId;
+            user.BranchId = PMBId;
 
             _AccountRepository.Add(account);
             _UserRepository.Add(user);

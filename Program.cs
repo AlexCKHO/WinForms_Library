@@ -26,22 +26,26 @@ namespace EI_Task
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //Dependency Injection
+
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
+
+            //Run SeedDate
 
             using (var scope = ServiceProvider.CreateScope())
             {
                 SeedData.Initialise(scope.ServiceProvider);
             }
 
-                Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
+            //Run the LoginForm
 
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
+
 
         }
 
-        public static IServiceProvider ServiceProvider { get; private set; }
+        public static IServiceProvider? ServiceProvider { get; private set; }
         static IHostBuilder CreateHostBuilder()
         {
 

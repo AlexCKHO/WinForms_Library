@@ -29,7 +29,7 @@ namespace EI_Task.Data
                 context.SaveChanges();
 
             }
-
+            #region Adding_Accounts_And_Users
             var account1 = new Account();
             account1.Email = "testing1@testing.com";
             account1.Password = "password";
@@ -76,8 +76,126 @@ namespace EI_Task.Data
             account3.UserId = user3.UserId;
 
             context.SaveChanges();
+
+            #endregion
+
+            #region Adding_Branches
+
+           var listOfbranches = new List<Branch>
+            {
+                new Branch
+                {
+                    BranchName = "Testing1",
+                    Address = "TestingAddress1",
+                    NumberOfActiveUsers = 0,
+                    NumberOfAvailableBooks = 0,
+                    OpeningHours = "09:00 to 22:00"
+                },
+                new Branch
+                {
+                    BranchName = "Testing2",
+                    Address = "TestingAddress2",
+                    NumberOfActiveUsers = 0,
+                    NumberOfAvailableBooks = 0,
+                    OpeningHours = "09:30 to 22:30"
+                },
+                new Branch
+                {
+                    BranchName = "Testing3",
+                    Address = "TestingAddress3",
+                    NumberOfActiveUsers = 0,
+                    NumberOfAvailableBooks = 0,
+                    OpeningHours = "09:30 to 22:30"
+                }
+            };
+
+
+            context.Branches.AddRange(listOfbranches);
+            context.SaveChanges();
+
+            #endregion
+
+            #region Adding_Books
+            var ListOfBooks = new List<Book>
+            {
+                new Book
+                {
+                    Name = "BookName1",
+                    PublishedYear = 2020,
+                    Availability = true,
+                    BranchId = 1
+                },
+                new Book
+                {
+                    Name = "BookName2",
+                    PublishedYear = 2018,
+                    Availability = false,
+                    BranchId = 2
+                },
+                new Book
+                {
+                    Name = "BookName3",
+                    PublishedYear = 2022,
+                    Availability = true,
+                    BranchId = 3
+                },
+                new Book
+                {
+                    Name = "BookName4",
+                    PublishedYear = 2015,
+                    Availability = true,
+                    BranchId = 1
+                },
+                new Book
+                {
+                    Name = "BookName5",
+                    PublishedYear = 2019,
+                    Availability = false,
+                    BranchId = 2
+                },
+                new Book
+                {
+                    Name = "BookName6",
+                    PublishedYear = 2021,
+                    Availability = true,
+                    BranchId = 3
+                },
+                new Book
+                {
+                    Name = "BookName7",
+                    PublishedYear = 2017,
+                    Availability = true,
+                    BranchId = 1
+                },
+                new Book
+                {
+                    Name = "BookName8",
+                    PublishedYear = 2023,
+                    Availability = true,
+                    BranchId = 2
+                },
+                new Book
+                {
+                    Name = "BookName9",
+                    PublishedYear = 2016,
+                    Availability = false,
+                    BranchId = 3
+                },
+                new Book
+                {
+                    Name = "BookName10",
+                    PublishedYear = 2020,
+                    Availability = true,
+                    BranchId = 1
+                }
+            };
+
+            context.Books.AddRange(ListOfBooks);
+            context.SaveChanges();
+
+            #endregion
         }
 
 
-        }
+    }
 }
