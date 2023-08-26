@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace EI_Task
 {
-    public partial class Form2 : Form
+    public partial class MainForm : Form
     {
         int input;
-        public Form2(int someData)
+        public MainForm(int someData)
         {
             InitializeComponent();
              input = someData;

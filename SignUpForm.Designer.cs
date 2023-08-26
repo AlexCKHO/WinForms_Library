@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             NameTextBox = new TextBox();
-            DOBTextBox = new TextBox();
+            DateTextBox = new TextBox();
             EmailTextBox = new TextBox();
             PMBTextBox = new TextBox();
             PasswordTextBox = new TextBox();
@@ -43,6 +43,8 @@
             PMBLabel = new Label();
             PasswordLable = new Label();
             SubmitButton = new Button();
+            MonthTextBox = new TextBox();
+            YearTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
@@ -53,12 +55,12 @@
             NameTextBox.Size = new Size(208, 23);
             NameTextBox.TabIndex = 0;
             // 
-            // DOBTextBox
+            // DateTextBox
             // 
-            DOBTextBox.Location = new Point(307, 125);
-            DOBTextBox.Name = "DOBTextBox";
-            DOBTextBox.Size = new Size(208, 23);
-            DOBTextBox.TabIndex = 1;
+            DateTextBox.Location = new Point(307, 125);
+            DateTextBox.Name = "DateTextBox";
+            DateTextBox.Size = new Size(56, 23);
+            DateTextBox.TabIndex = 1;
             // 
             // EmailTextBox
             // 
@@ -162,11 +164,27 @@
             SubmitButton.UseVisualStyleBackColor = true;
             SubmitButton.Click += SubmitButton_Click;
             // 
+            // MonthTextBox
+            // 
+            MonthTextBox.Location = new Point(384, 125);
+            MonthTextBox.Name = "MonthTextBox";
+            MonthTextBox.Size = new Size(56, 23);
+            MonthTextBox.TabIndex = 13;
+            // 
+            // YearTextBox
+            // 
+            YearTextBox.Location = new Point(459, 125);
+            YearTextBox.Name = "YearTextBox";
+            YearTextBox.Size = new Size(56, 23);
+            YearTextBox.TabIndex = 14;
+            // 
             // SignUpForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(YearTextBox);
+            Controls.Add(MonthTextBox);
             Controls.Add(SubmitButton);
             Controls.Add(PasswordLable);
             Controls.Add(PMBLabel);
@@ -178,7 +196,7 @@
             Controls.Add(PasswordTextBox);
             Controls.Add(AddressTextBox);
             Controls.Add(EmailTextBox);
-            Controls.Add(DOBTextBox);
+            Controls.Add(DateTextBox);
             Controls.Add(NameTextBox);
             Name = "SignUpForm";
             Text = "SignUpForm";
@@ -191,7 +209,7 @@
         #endregion
 
         private TextBox NameTextBox;
-        private TextBox DOBTextBox;
+        private TextBox DateTextBox;
         private TextBox EmailTextBox;
         private TextBox PMBTextBox;
         private TextBox PasswordTextBox;
@@ -204,5 +222,7 @@
         private Label AddressLable;
         private Label NameLabel;
         private Button SubmitButton;
+        private TextBox YearTextBox;
+        private TextBox MonthTextBox;
     }
 }

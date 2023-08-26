@@ -46,7 +46,7 @@ namespace EI_Task
 
             if (userId != -1)
             {
-                Form2 form2 = new Form2(userId);
+                MainForm form2 = new MainForm(userId);
                 this.Hide();
                 form2.ShowDialog();
                 this.Close();
