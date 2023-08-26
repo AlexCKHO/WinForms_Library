@@ -211,7 +211,7 @@
             // 
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            StatusLabel.Location = new Point(397, 25);
+            StatusLabel.Location = new Point(248, 25);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Size = new Size(0, 32);
             StatusLabel.TabIndex = 17;

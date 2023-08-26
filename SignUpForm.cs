@@ -1,23 +1,14 @@
-﻿using EI_Task.Models;
-using EI_Task.Services;
-using System;
-using System.Collections.Generic;
+﻿using EI_Task.Services;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace EI_Task
 {
     public partial class SignUpForm : Form
     {
         private readonly IUserManagerService _userManagerService;
-        private bool EntryError = true;
+        private bool brandNew = true;
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         public SignUpForm(IUserManagerService userManagerService)
         {
@@ -36,24 +27,21 @@ namespace EI_Task
 
         private async void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (EntryError)
+            if (AreAllInputsValid() && !brandNew)
             {
-                StatusLabel.ForeColor = Color.Red;
-                StatusLabel.Text = "Please fill in correct information";
-
-
-            }
-
-            if (!EntryError)
-            {
-
                 var result = await CreateUser();
                 if (result)
                 {
                     ResetAllTextBoxes();
                     StatusLabel.ForeColor = Color.Green;
                     StatusLabel.Text = "Successfully Registered";
+                    brandNew = true;
                 }
+            }
+            else
+            {
+                StatusLabel.ForeColor = Color.Red;
+                StatusLabel.Text = "Please fill in correct information";
             }
 
         }
@@ -72,7 +60,6 @@ namespace EI_Task
         }
 
 
-
         private void BackToLoginButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -80,16 +67,15 @@ namespace EI_Task
 
         private void NameTextBox_Validating(object sender, CancelEventArgs e)
         {
-            StatusLabel.Text = "";
 
             if (string.IsNullOrEmpty(NameTextBox.Text))
             {
-                EntryError = true;
+
                 errorProvider.SetError(NameTextBox, "Please enter your name !");
             }
             else
             {
-                EntryError = false;
+
                 errorProvider.SetError(NameTextBox, null);
             }
 
@@ -110,7 +96,7 @@ namespace EI_Task
             PasswordTextBox.Text = String.Empty;
             AddressTextBox.Text = String.Empty;
             ListOfBranch.SelectedIndex = 0;
-            EntryError = true;
+
         }
 
 
@@ -127,17 +113,17 @@ namespace EI_Task
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                EntryError = true;
+
                 errorProvider.SetError(EmailTextBox, "Please enter an email address!");
             }
             else if (!Regex.IsMatch(email, pattern))
             {
-                EntryError = true;
+
                 errorProvider.SetError(EmailTextBox, "Invalid email format!");
             }
             else
             {
-                EntryError = false;
+
                 errorProvider.SetError(EmailTextBox, null);
             }
         }
@@ -148,12 +134,12 @@ namespace EI_Task
 
             if (!Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d\d)(?=.*[@$!%*#?&.])[^ ]{7,}$"))
             {
-                EntryError = true;
+
                 errorProvider.SetError(PasswordTextBox, "Password must not contain spaces, and should have at least 7 characters, 2 numbers, and a special character!");
             }
             else
             {
-                EntryError = false;
+
                 errorProvider.SetError(PasswordTextBox, null);
             }
 
@@ -163,12 +149,11 @@ namespace EI_Task
         {
             if (string.IsNullOrEmpty(AddressTextBox.Text))
             {
-                EntryError = true;
+
                 errorProvider.SetError(AddressTextBox, "Please enter your address !");
             }
             else
             {
-                EntryError = false;
                 errorProvider.SetError(AddressTextBox, null);
             }
         }
@@ -177,12 +162,12 @@ namespace EI_Task
         {
             if (string.IsNullOrEmpty(ListOfBranch.Text))
             {
-                EntryError = true;
+
                 errorProvider.SetError(ListOfBranch, "Please Select a branch!");
             }
             else
             {
-                EntryError = false;
+
                 errorProvider.SetError(ListOfBranch, null);
             }
         }
@@ -190,6 +175,9 @@ namespace EI_Task
 
         private void DateTextBox_Validating(object sender, CancelEventArgs e)
         {
+            StatusLabel.Text = "";
+            brandNew = false;
+
             ValidateDate();
         }
 
@@ -211,14 +199,12 @@ namespace EI_Task
             {
                 if (IsValidDate(day, month, year))
                 {
-                    EntryError = false;
                     errorProvider.SetError(DateTextBox, null);
                     errorProvider.SetError(MonthTextBox, null);
                     errorProvider.SetError(YearTextBox, null);
                 }
                 else
                 {
-                    EntryError = true;
                     errorProvider.SetError(DateTextBox, "Invalid date.");
                     errorProvider.SetError(MonthTextBox, "Invalid month.");
                     errorProvider.SetError(YearTextBox, "Invalid year.");
@@ -226,7 +212,6 @@ namespace EI_Task
             }
             else
             {
-                EntryError = true;
                 errorProvider.SetError(DateTextBox, "Please enter a valid day.");
                 errorProvider.SetError(MonthTextBox, "Please enter a valid month.");
                 errorProvider.SetError(YearTextBox, "Please enter a valid year.");
@@ -253,6 +238,24 @@ namespace EI_Task
                 return false;
             }
 
+            return true;
+        }
+
+
+        private bool AreAllInputsValid()
+        {
+            foreach (Control control in this.Controls)
+            {
+                // You can extend this check for other types of controls as needed.
+                if (control is System.Windows.Forms.TextBox || control is System.Windows.Forms.ComboBox)
+                {
+                    string errorMessage = errorProvider.GetError(control);
+                    if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        return false;
+                    }
+                }
+            }
             return true;
         }
     }
