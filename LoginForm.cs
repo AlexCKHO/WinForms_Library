@@ -22,7 +22,6 @@ namespace EI_Task
             _loginService = loginService;
             _userManagerService = userManagerService;
             InitializeComponent();
-            
         }
 
 
@@ -67,7 +66,7 @@ namespace EI_Task
             this.Hide();
             signUpForm.ShowDialog();
             this.Show();
-            
+
         }
     }
 }

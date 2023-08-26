@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             NameTextBox = new TextBox();
             DateTextBox = new TextBox();
             EmailTextBox = new TextBox();
@@ -44,6 +45,9 @@
             MonthTextBox = new TextBox();
             YearTextBox = new TextBox();
             BackToLoginButton = new Button();
+            errorProvider = new ErrorProvider(components);
+            ListOfBranch = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // NameTextBox
@@ -52,11 +56,13 @@
             NameTextBox.Name = "NameTextBox";
             NameTextBox.Size = new Size(208, 23);
             NameTextBox.TabIndex = 0;
+            NameTextBox.Validating += NameTextBox_Validating;
             // 
             // DateTextBox
             // 
             DateTextBox.Location = new Point(307, 125);
             DateTextBox.Name = "DateTextBox";
+            DateTextBox.PlaceholderText = "DD";
             DateTextBox.Size = new Size(56, 23);
             DateTextBox.TabIndex = 1;
             // 
@@ -78,6 +84,7 @@
             // 
             PasswordTextBox.Location = new Point(307, 259);
             PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.PasswordChar = '*';
             PasswordTextBox.Size = new Size(208, 23);
             PasswordTextBox.TabIndex = 4;
             // 
@@ -162,6 +169,7 @@
             // 
             MonthTextBox.Location = new Point(384, 125);
             MonthTextBox.Name = "MonthTextBox";
+            MonthTextBox.PlaceholderText = "MM";
             MonthTextBox.Size = new Size(56, 23);
             MonthTextBox.TabIndex = 13;
             // 
@@ -169,6 +177,7 @@
             // 
             YearTextBox.Location = new Point(459, 125);
             YearTextBox.Name = "YearTextBox";
+            YearTextBox.PlaceholderText = "YYYY";
             YearTextBox.Size = new Size(56, 23);
             YearTextBox.TabIndex = 14;
             // 
@@ -183,11 +192,26 @@
             BackToLoginButton.UseVisualStyleBackColor = true;
             BackToLoginButton.Click += BackToLoginButton_Click;
             // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
+            // ListOfBranch
+            // 
+            ListOfBranch.DropDownStyle = ComboBoxStyle.DropDownList;
+            ListOfBranch.FormattingEnabled = true;
+            ListOfBranch.Items.AddRange(new object[] { "HereOne", "HereTwo" });
+            ListOfBranch.Location = new Point(633, 169);
+            ListOfBranch.Name = "ListOfBranch";
+            ListOfBranch.Size = new Size(121, 23);
+            ListOfBranch.TabIndex = 16;
+            // 
             // SignUpForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ListOfBranch);
             Controls.Add(BackToLoginButton);
             Controls.Add(YearTextBox);
             Controls.Add(MonthTextBox);
@@ -208,6 +232,7 @@
             Name = "SignUpForm";
             Text = "SignUpForm";
             Load += SignUpForm_Load;
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -230,5 +255,7 @@
         private TextBox YearTextBox;
         private TextBox MonthTextBox;
         private Button BackToLoginButton;
+        private ErrorProvider errorProvider;
+        private ComboBox ListOfBranch;
     }
 }

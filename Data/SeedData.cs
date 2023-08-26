@@ -1,16 +1,5 @@
 ﻿using EI_Task.Models;
-using EI_Task.Services;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic.ApplicationServices;
 
 namespace EI_Task.Data
 {
@@ -61,7 +50,7 @@ namespace EI_Task.Data
             user3.DateOfBirth = new DateTime(2013, 10, 09);
 
 
-            context.Accounts.AddRange(account1,account2,account3);
+            context.Accounts.AddRange(account1, account2, account3);
             context.Users.AddRange(user1, user2, user3);
 
             context.SaveChanges();
@@ -81,7 +70,7 @@ namespace EI_Task.Data
 
             #region Adding_Branches
 
-           var listOfbranches = new List<Branch>
+            var listOfbranches = new List<Branch>
             {
                 new Branch
                 {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EI_Task.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20230826082401_Change PrimaryMembershipBranchId in User")]
-    partial class ChangePrimaryMembershipBranchIdinUser
+    [Migration("20230826095621_Account update, Password required")]
+    partial class AccountupdatePasswordrequired
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

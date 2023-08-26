@@ -12,15 +12,16 @@ namespace EI_Task.Services
     public class UserManagerService : IUserManagerService
     {
         private readonly ILogger _logger;
-        private readonly ILibraryRepository<User> _UserRepository;
-        private readonly ILibraryRepository<Account> _AccountRepository;
+        private readonly ILibraryRepository<User> _userRepository;
+        private readonly ILibraryRepository<Account> _accountRepository;
+        private readonly ILibraryRepository<Branch> _branchRepository;
 
-        public UserManagerService(ILogger<IUserManagerService> logger, ILibraryRepository<User> UserRepository, ILibraryRepository<Account> AccountRepository)
+        public UserManagerService(ILogger<IUserManagerService> logger, ILibraryRepository<User> userRepository, ILibraryRepository<Account> accountRepository, ILibraryRepository<Branch> branchRepository)
         {
             _logger = logger;
-            _UserRepository = UserRepository;
-            _AccountRepository = AccountRepository;
-
+            _userRepository = userRepository;
+            _accountRepository = accountRepository;
+            _branchRepository = branchRepository;
         }
 
         public async Task<bool> CreateUserAndAccount(string name, DateTime DOB, string email, string Address, int PMBId, string password)
@@ -37,14 +38,14 @@ namespace EI_Task.Services
             user.DateOfBirth = DOB;
             user.BranchId = PMBId;
 
-            _AccountRepository.Add(account);
-            _UserRepository.Add(user);
-            await _UserRepository.SaveAsync();
+            _accountRepository.Add(account);
+            _userRepository.Add(user);
+            await _userRepository.SaveAsync();
 
             user.AccountId = account.AccountId;
             account.UserId = user.UserId;
 
-            await _UserRepository.SaveAsync();
+            await _userRepository.SaveAsync();
             return true;
             }
             catch (Exception ex)
@@ -55,5 +56,15 @@ namespace EI_Task.Services
 
             }
         }
+
+        public async Task<Dictionary<string,int>> GetBranchNameAndId()
+        {
+            IEnumerable<Branch> branches = await _branchRepository.GetAllAsync();
+
+            Dictionary<string, int> branchIdDictionary = branches.ToDictionary(branch => branch.BranchName, branch => branch.BranchId);
+
+            return branchIdDictionary;
+        }
+
     }
 }
