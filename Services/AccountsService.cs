@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EI_Task.Services
 {
-    public class AccountService :  IAccountService
+    public class AccountsService :  IAccountService
     {
         private readonly ILibraryRepository<Account> _repository;
 
-        public AccountService(ILibraryRepository<Account> repository) 
+        public AccountsService(ILibraryRepository<Account> repository) 
         {
             _repository = repository;
         }

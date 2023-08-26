@@ -24,6 +24,9 @@ namespace EI_Task
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
+            string name = NameTextBox.Text;
+            DateTime DOB = DateTime.Parse($"{YearTextBox.Text}-{MonthTextBox.Text}-{DateTextBox.Text} TimeSpan.Zero");
+
 
         }
     }
