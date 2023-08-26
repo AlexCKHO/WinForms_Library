@@ -8,7 +8,7 @@ namespace EI_Task
     public partial class SignUpForm : Form
     {
         private readonly IUserManagerService _userManagerService;
-        private bool brandNew = true;
+        private bool _brandNew = true;
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         public SignUpForm(IUserManagerService userManagerService)
         {
@@ -26,7 +26,7 @@ namespace EI_Task
 
         private async void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (AreAllInputsValid() && !brandNew)
+            if (AreAllInputsValid() && !_brandNew)
             {
                 var result = await CreateUser();
                 if (result)
@@ -34,7 +34,7 @@ namespace EI_Task
                     ResetAllTextBoxes();
                     StatusLabel.ForeColor = Color.Green;
                     StatusLabel.Text = "Successfully Registered";
-                    brandNew = true;
+                    _brandNew = true;
                 }
             }
             else
@@ -99,6 +99,7 @@ namespace EI_Task
         }
 
 
+
         private void ListOfBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
@@ -107,7 +108,6 @@ namespace EI_Task
         {
             string email = EmailTextBox.Text;
 
-            // Regular expression for validating email
             string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
 
             if (string.IsNullOrWhiteSpace(email))
@@ -175,7 +175,7 @@ namespace EI_Task
         private void DateTextBox_Validating(object sender, CancelEventArgs e)
         {
             StatusLabel.Text = "";
-            brandNew = false;
+            _brandNew = false;
 
             ValidateDate();
         }
@@ -245,9 +245,12 @@ namespace EI_Task
         {
             foreach (Control control in this.Controls)
             {
-                // You can extend this check for other types of controls as needed.
                 if (control is System.Windows.Forms.TextBox || control is System.Windows.Forms.ComboBox)
                 {
+                    if (!String.IsNullOrEmpty(control.Text))
+                    {
+                        return false;
+                    }
                     string errorMessage = errorProvider.GetError(control);
                     if (!string.IsNullOrEmpty(errorMessage))
                     {

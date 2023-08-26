@@ -34,11 +34,13 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             label1 = new Label();
             BookDataGrid = new DataGridView();
+            BookId = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             publishedYearDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             availabilityDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            Location = new DataGridViewTextBoxColumn();
+            BranchId = new DataGridViewTextBoxColumn();
             bookBindingSource = new BindingSource(components);
+            btnDelete = new DataGridViewButtonColumn();
             comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
@@ -55,7 +57,7 @@
             // 
             // BookDataGrid
             // 
-            BookDataGrid.AllowUserToDeleteRows = false;
+            BookDataGrid.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(238, 239, 249);
             BookDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             BookDataGrid.AutoGenerateColumns = false;
@@ -70,7 +72,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             BookDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             BookDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            BookDataGrid.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, publishedYearDataGridViewTextBoxColumn, availabilityDataGridViewCheckBoxColumn, Location });
+            BookDataGrid.Columns.AddRange(new DataGridViewColumn[] { BookId, nameDataGridViewTextBoxColumn, publishedYearDataGridViewTextBoxColumn, availabilityDataGridViewCheckBoxColumn, BranchId, btnDelete });
             BookDataGrid.DataSource = bookBindingSource;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Window;
@@ -83,43 +85,55 @@
             BookDataGrid.EnableHeadersVisualStyles = false;
             BookDataGrid.Location = new Point(94, 87);
             BookDataGrid.Name = "BookDataGrid";
-            BookDataGrid.ReadOnly = true;
             BookDataGrid.RowTemplate.Height = 25;
-            BookDataGrid.Size = new Size(441, 530);
+            BookDataGrid.Size = new Size(546, 506);
             BookDataGrid.TabIndex = 1;
             BookDataGrid.CellContentClick += BookDataGrid_CellContentClick;
+            BookDataGrid.CellEndEdit += BookDataGrid_CellEndEdit;
+            BookDataGrid.CellClick += BookDataGrid_CellClick;
+            // 
+            // BookId
+            // 
+            BookId.DataPropertyName = "BookId";
+            BookId.HeaderText = "BookId";
+            BookId.Name = "BookId";
+            BookId.Visible = false;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             nameDataGridViewTextBoxColumn.HeaderText = "Name";
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // publishedYearDataGridViewTextBoxColumn
             // 
             publishedYearDataGridViewTextBoxColumn.DataPropertyName = "PublishedYear";
             publishedYearDataGridViewTextBoxColumn.HeaderText = "PublishedYear";
             publishedYearDataGridViewTextBoxColumn.Name = "publishedYearDataGridViewTextBoxColumn";
-            publishedYearDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // availabilityDataGridViewCheckBoxColumn
             // 
             availabilityDataGridViewCheckBoxColumn.DataPropertyName = "Availability";
             availabilityDataGridViewCheckBoxColumn.HeaderText = "Availability";
             availabilityDataGridViewCheckBoxColumn.Name = "availabilityDataGridViewCheckBoxColumn";
-            availabilityDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
-            // Location
+            // BranchId
             // 
-            Location.DataPropertyName = "BranchName";
-            Location.HeaderText = "Location";
-            Location.Name = "Location";
-            Location.ReadOnly = true;
+            BranchId.DataPropertyName = "BranchId";
+            BranchId.HeaderText = "Branch Id";
+            BranchId.Name = "BranchId";
+            BranchId.ReadOnly = true;
             // 
             // bookBindingSource
             // 
             bookBindingSource.DataSource = typeof(Models.Book);
+            // 
+            // btnDelete
+            // 
+            btnDelete.HeaderText = "Delete";
+            btnDelete.Name = "btnDelete";
+            btnDelete.Text = "Delete";
+            btnDelete.UseColumnTextForButtonValue = true;
             // 
             // comboBox1
             // 
@@ -152,9 +166,11 @@
         private DataGridView BookDataGrid;
         private BindingSource bookBindingSource;
         private ComboBox comboBox1;
+        private DataGridViewTextBoxColumn BookId;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn publishedYearDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn availabilityDataGridViewCheckBoxColumn;
-        private DataGridViewTextBoxColumn Location;
+        private DataGridViewTextBoxColumn BranchId;
+        private DataGridViewButtonColumn btnDelete;
     }
 }

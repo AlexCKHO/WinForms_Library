@@ -47,7 +47,6 @@
             TextBoxEmail.Name = "TextBoxEmail";
             TextBoxEmail.Size = new Size(216, 23);
             TextBoxEmail.TabIndex = 0;
-            TextBoxEmail.TextChanged += TextBoxEmail_TextChanged;
             // 
             // TextBoxPW
             // 
@@ -58,7 +57,6 @@
             TextBoxPW.PasswordChar = '*';
             TextBoxPW.Size = new Size(216, 23);
             TextBoxPW.TabIndex = 3;
-            TextBoxPW.TextChanged += TextBoxPW_TextChanged;
             TextBoxPW.KeyPress += TextBoxPW_KeyPress;
             // 
             // LoginSubmitButton
@@ -90,7 +88,6 @@
             UserNameLabel.Size = new Size(117, 25);
             UserNameLabel.TabIndex = 7;
             UserNameLabel.Text = "User Name :";
-            UserNameLabel.Click += UserNameLabel_Click;
             // 
             // PasswordLabel
             // 
@@ -101,7 +98,6 @@
             PasswordLabel.Size = new Size(101, 25);
             PasswordLabel.TabIndex = 8;
             PasswordLabel.Text = "Password :";
-            PasswordLabel.Click += PasswordLabel_Click;
             // 
             // LoginStatusLabel
             // 

@@ -68,23 +68,6 @@ namespace EI_Task
 
         }
 
-        private void PasswordLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UserNameLabel_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void TextBoxPW_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void TextBoxEmail_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void TextBoxPW_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = (e.KeyChar == (char)Keys.Space);

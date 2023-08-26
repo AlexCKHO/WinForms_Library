@@ -20,8 +20,8 @@ namespace EI_Task.Data
             }
             #region Adding_Accounts_And_Users
             var account1 = new Account();
-            account1.Email = "testing1@testing.com";
-            account1.Password = "password";
+            account1.Email = "1";
+            account1.Password = "1";
 
             var user1 = new Models.User();
             user1.Address = "UserAddress1";

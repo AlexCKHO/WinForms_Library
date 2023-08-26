@@ -59,7 +59,6 @@ namespace EI_Task
                     services.AddScoped<ILibraryRepository<Book>, BooksRepository>();
                     services.AddScoped(typeof(ILibraryRepository<>), typeof(LibraryRepository<>));
                     services.AddScoped(typeof(ILibraryService<>), typeof(LibraryService<>));
-                    services.AddScoped<ILibraryService<Book>, BooksService>();
                     services.AddScoped<IAccountService, AccountsService>();
                     services.AddScoped<IUserManagerService, UserManagerService>();
                 });
