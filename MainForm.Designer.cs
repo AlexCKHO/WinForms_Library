@@ -39,9 +39,9 @@
             publishedYearDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             availabilityDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             BranchId = new DataGridViewTextBoxColumn();
-            bookBindingSource = new BindingSource(components);
             btnDelete = new DataGridViewButtonColumn();
-            comboBox1 = new ComboBox();
+            bookBindingSource = new BindingSource(components);
+            ListOfBranch = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
             SuspendLayout();
@@ -88,9 +88,9 @@
             BookDataGrid.RowTemplate.Height = 25;
             BookDataGrid.Size = new Size(546, 506);
             BookDataGrid.TabIndex = 1;
+            BookDataGrid.CellClick += BookDataGrid_CellClick;
             BookDataGrid.CellContentClick += BookDataGrid_CellContentClick;
             BookDataGrid.CellEndEdit += BookDataGrid_CellEndEdit;
-            BookDataGrid.CellClick += BookDataGrid_CellClick;
             // 
             // BookId
             // 
@@ -124,10 +124,6 @@
             BranchId.Name = "BranchId";
             BranchId.ReadOnly = true;
             // 
-            // bookBindingSource
-            // 
-            bookBindingSource.DataSource = typeof(Models.Book);
-            // 
             // btnDelete
             // 
             btnDelete.HeaderText = "Delete";
@@ -135,28 +131,33 @@
             btnDelete.Text = "Delete";
             btnDelete.UseColumnTextForButtonValue = true;
             // 
-            // comboBox1
+            // bookBindingSource
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(759, 87);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 2;
+            bookBindingSource.DataSource = typeof(Models.Book);
+            // 
+            // ListOfBranch
+            // 
+            ListOfBranch.FormattingEnabled = true;
+            ListOfBranch.Location = new Point(759, 87);
+            ListOfBranch.Name = "ListOfBranch";
+            ListOfBranch.Size = new Size(121, 23);
+            ListOfBranch.TabIndex = 2;
+            ListOfBranch.SelectedValueChanged += ListOfBranch_SelectedValueChanged;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1235, 726);
-            Controls.Add(comboBox1);
+            Controls.Add(ListOfBranch);
             Controls.Add(BookDataGrid);
             Controls.Add(label1);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main Page";
+            Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();
-            Load += MainForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -166,7 +167,7 @@
         private Label label1;
         private DataGridView BookDataGrid;
         private BindingSource bookBindingSource;
-        private ComboBox comboBox1;
+        private ComboBox ListOfBranch;
         private DataGridViewTextBoxColumn BookId;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn publishedYearDataGridViewTextBoxColumn;

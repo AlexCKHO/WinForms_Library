@@ -16,6 +16,7 @@ namespace EI_Task
     {
         private readonly ILibraryService<Book> _booksService;
         private readonly IUserManagerService _userManagerService;
+        private List<Book> _allBooks = new List<Book>();
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         private string _originalValue;
         public MainForm(ILibraryService<Book> booksService, IUserManagerService userManagerService)
@@ -28,11 +29,17 @@ namespace EI_Task
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-             GetListOfBook();
-            await GetBranchNameAndId();
-
+            GetListOfBook();
+            SetDict();
         }
 
+        private async void SetDict()
+        {
+            await GetBranchNameAndId();
+            ListOfBranch.Items.Clear();
+            ListOfBranch.Items.Add("All");
+            ListOfBranch.Items.AddRange(_branchNameAndId.Keys.ToArray());
+        }
 
         private async Task GetBranchNameAndId()
         {
@@ -41,10 +48,23 @@ namespace EI_Task
         }
         private async void GetListOfBook()
         {
-            var books = await _booksService.GetAllAsync();
+            _allBooks = (await _booksService.GetAllAsync()).ToList();
+            BookDataGrid.DataSource = _allBooks;
+        }
 
-            BookDataGrid.DataSource = books.ToList();
-
+        private void ListOfBranch_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(ListOfBranch.Text == "All")
+            {
+                BookDataGrid.DataSource = _allBooks;
+            }
+            else
+            {
+                int branchId = _branchNameAndId.FirstOrDefault(x => x.Key == ListOfBranch.Text).Value;
+                var filteredBooks = _allBooks.Where(book => book.BranchId == branchId).ToList();
+                BookDataGrid.DataSource = filteredBooks;
+            }
+            
         }
 
         private async void BookDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -146,5 +166,6 @@ namespace EI_Task
             }
         }
 
+        
     }
 }
