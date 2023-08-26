@@ -24,7 +24,6 @@ namespace EI_Task
         }
 
 
-
         private async void SubmitButton_Click(object sender, EventArgs e)
         {
             if (AreAllInputsValid() && !brandNew)

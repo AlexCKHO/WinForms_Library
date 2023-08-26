@@ -112,70 +112,70 @@ namespace EI_Task.Data
                     Name = "BookName1",
                     PublishedYear = 2020,
                     Availability = true,
-                    BranchId = 1
+                    BranchId = listOfbranches[0].BranchId
                 },
                 new Book
                 {
                     Name = "BookName2",
                     PublishedYear = 2018,
                     Availability = false,
-                    BranchId = 2
+                    BranchId = listOfbranches[1].BranchId
                 },
                 new Book
                 {
                     Name = "BookName3",
                     PublishedYear = 2022,
                     Availability = true,
-                    BranchId = 3
+                    BranchId = listOfbranches[2].BranchId
                 },
                 new Book
                 {
                     Name = "BookName4",
                     PublishedYear = 2015,
                     Availability = true,
-                    BranchId = 1
+                    BranchId = listOfbranches[0].BranchId
                 },
                 new Book
                 {
                     Name = "BookName5",
                     PublishedYear = 2019,
                     Availability = false,
-                    BranchId = 2
+                    BranchId = listOfbranches[1].BranchId
                 },
                 new Book
                 {
                     Name = "BookName6",
                     PublishedYear = 2021,
                     Availability = true,
-                    BranchId = 3
+                    BranchId = listOfbranches[2].BranchId
                 },
                 new Book
                 {
                     Name = "BookName7",
                     PublishedYear = 2017,
                     Availability = true,
-                    BranchId = 1
+                    BranchId = listOfbranches[0].BranchId
                 },
                 new Book
                 {
                     Name = "BookName8",
                     PublishedYear = 2023,
                     Availability = true,
-                    BranchId = 2
+                    BranchId = listOfbranches[1].BranchId
                 },
                 new Book
                 {
                     Name = "BookName9",
                     PublishedYear = 2016,
                     Availability = false,
-                    BranchId = 3
+                    BranchId = listOfbranches[2].BranchId
                 },
                 new Book
                 {
                     Name = "BookName10",
                     PublishedYear = 2020,
                     Availability = true,
-                    BranchId = 1
+                    BranchId = listOfbranches[0].BranchId
                 }
             };
 

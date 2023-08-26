@@ -8,36 +8,34 @@ namespace EI_Task
 {
     public partial class LoginForm : Form
     {
-        private readonly ILibraryService<Book> _libraryService;
+        private readonly ILibraryService<Book> _booksService;
+        private readonly ILibraryService<Branch> _branchesService;
         private readonly IAccountService _loginService;
         private readonly IUserManagerService _userManagerService;
 
 
-        public LoginForm(ILibraryService<Book> libraryService
+        public LoginForm(ILibraryService<Book> booksService
                     , IAccountService loginService
                     , IUserManagerService userManagerService
+                    ,ILibraryService<Branch> branchesService
+
             )
         {
-            _libraryService = libraryService;
+            _booksService = booksService;
+            _branchesService = branchesService;
             _loginService = loginService;
             _userManagerService = userManagerService;
             InitializeComponent();
+           
         }
 
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private async void LoginForm_Load(object sender, EventArgs e)
         {
-            label1TextChange();
+
 
         }
-        private async void label1TextChange() //testing purpose 
-        {
-            var book = await _libraryService.GetAsync(1);
-            if (book != null)
-            {
-                label1.Text = book.Name;
-            }
-        }
+
 
 
         private async void LoginSubmitButton_Click(object sender, EventArgs e)
@@ -49,14 +47,15 @@ namespace EI_Task
 
             if (userId != -1)
             {
-                MainForm form2 = new MainForm(userId);
+                MainForm mainForm = new MainForm(_booksService,_branchesService);
                 this.Hide();
-                form2.ShowDialog();
+                mainForm.ShowDialog();
                 this.Close();
             }
             else
             {
-                label2.Text = "Login Attempt Failed";
+                LoginStatusLabel.ForeColor = Color.Red;
+                LoginStatusLabel.Text = "Login Attempt Failed";
             }
         }
 
@@ -67,6 +66,28 @@ namespace EI_Task
             signUpForm.ShowDialog();
             this.Show();
 
+        }
+
+        private void PasswordLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserNameLabel_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void TextBoxPW_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void TextBoxEmail_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void TextBoxPW_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = (e.KeyChar == (char)Keys.Space);
         }
     }
 }
