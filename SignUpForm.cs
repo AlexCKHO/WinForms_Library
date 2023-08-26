@@ -29,5 +29,10 @@ namespace EI_Task
 
 
         }
+
+        private void BackToLoginButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

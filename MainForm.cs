@@ -16,7 +16,7 @@ namespace EI_Task
         public MainForm(int someData)
         {
             InitializeComponent();
-             input = someData;
+            input = someData;
             changeTextTesting();
         }
 
@@ -24,6 +24,6 @@ namespace EI_Task
         {
             label1.Text = $"Your user ID is {input}";
         }
-        
+
     }
 }

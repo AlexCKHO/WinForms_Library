@@ -40,13 +40,13 @@
             label1.TabIndex = 0;
             label1.Text = "label1";
             // 
-            // Form2
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(913, 493);
+            ClientSize = new Size(800, 450);
             Controls.Add(label1);
-            Name = "Form2";
+            Name = "MainForm";
             Text = "Form2";
             ResumeLayout(false);
             PerformLayout();

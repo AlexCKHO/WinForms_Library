@@ -2,6 +2,7 @@ using EI_Task.Data;
 using EI_Task.Models;
 using EI_Task.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace EI_Task
 {
@@ -19,8 +20,8 @@ namespace EI_Task
             _loginService = loginService;
             //    _branchService = branchService;
             InitializeComponent();
-            _loginService = loginService;
         }
+
 
         private async void Form1_Load(object sender, EventArgs e)
         {
@@ -40,9 +41,9 @@ namespace EI_Task
         private async void LoginSubmitButton_Click(object sender, EventArgs e)
         {
             string email = TextBoxEmail.Text.ToLower();
-            string password = TextBoxPW.Text.ToLower();  
+            string password = TextBoxPW.Text.ToLower();
 
-            int userId = await _loginService.LoginAsync(email, password);  
+            int userId = await _loginService.LoginAsync(email, password);
 
             if (userId != -1)
             {
@@ -57,6 +58,13 @@ namespace EI_Task
             }
         }
 
-
+        private void SignUpFormButton_Click(object sender, EventArgs e)
+        {
+            SignUpForm signUpForm = new SignUpForm();
+            this.Hide();
+            signUpForm.ShowDialog();
+            this.Show();
+            
+        }
     }
 }

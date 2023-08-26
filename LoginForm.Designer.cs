@@ -37,6 +37,7 @@
             LoginSubmitButton = new Button();
             label1 = new Label();
             label2 = new Label();
+            SignUpFormButton = new Button();
             SuspendLayout();
             // 
             // TextBoxEmail
@@ -84,11 +85,22 @@
             label2.TabIndex = 5;
             label2.Text = "label2";
             // 
+            // SignUpFormButton
+            // 
+            SignUpFormButton.Location = new Point(340, 344);
+            SignUpFormButton.Name = "SignUpFormButton";
+            SignUpFormButton.Size = new Size(75, 23);
+            SignUpFormButton.TabIndex = 6;
+            SignUpFormButton.Text = "Sign Up";
+            SignUpFormButton.UseVisualStyleBackColor = true;
+            SignUpFormButton.Click += SignUpFormButton_Click;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(SignUpFormButton);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(LoginSubmitButton);
@@ -109,5 +121,6 @@
         private Button LoginSubmitButton;
         private Label label1;
         private Label label2;
+        private Button SignUpFormButton;
     }
 }

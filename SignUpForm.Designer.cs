@@ -45,6 +45,7 @@
             SubmitButton = new Button();
             MonthTextBox = new TextBox();
             YearTextBox = new TextBox();
+            BackToLoginButton = new Button();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
@@ -178,11 +179,23 @@
             YearTextBox.Size = new Size(56, 23);
             YearTextBox.TabIndex = 14;
             // 
+            // BackToLoginButton
+            // 
+            BackToLoginButton.ForeColor = Color.Black;
+            BackToLoginButton.Location = new Point(29, 25);
+            BackToLoginButton.Name = "BackToLoginButton";
+            BackToLoginButton.Size = new Size(75, 23);
+            BackToLoginButton.TabIndex = 15;
+            BackToLoginButton.Text = "Back";
+            BackToLoginButton.UseVisualStyleBackColor = true;
+            BackToLoginButton.Click += BackToLoginButton_Click;
+            // 
             // SignUpForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(BackToLoginButton);
             Controls.Add(YearTextBox);
             Controls.Add(MonthTextBox);
             Controls.Add(SubmitButton);
@@ -198,6 +211,7 @@
             Controls.Add(EmailTextBox);
             Controls.Add(DateTextBox);
             Controls.Add(NameTextBox);
+            Location = new Point(340, 344);
             Name = "SignUpForm";
             Text = "SignUpForm";
             Load += SignUpForm_Load;
@@ -224,5 +238,6 @@
         private Button SubmitButton;
         private TextBox YearTextBox;
         private TextBox MonthTextBox;
+        private Button BackToLoginButton;
     }
 }
