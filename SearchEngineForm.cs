@@ -1,15 +1,6 @@
-﻿using EI_Task.Models;
-using EI_Task.Models.DTO;
+﻿using EI_Task.Models.DTO;
 using EI_Task.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace EI_Task
 {
@@ -49,12 +40,13 @@ namespace EI_Task
 
         private async Task<bool> getDTOByKeyword(string keyword)
         {
-            
+
             var result = await _bookManagerService.GetListOfBookSearchResultDTO(keyword);
-            if(result.Count == 0)
+            if (result.Count == 0)
             {
                 return false;
-            } else
+            }
+            else
             {
                 _listOfDTO.Clear();
                 _listOfDTO = result.ToList();
@@ -65,7 +57,6 @@ namespace EI_Task
 
         private async void SearchButton_Click(object sender, EventArgs e)
         {
-            //input -> string, string to trim
             string keyword = SearchTextBox.Text.Trim();
             if (String.IsNullOrEmpty(keyword))
             {
@@ -74,14 +65,25 @@ namespace EI_Task
             }
             else
             {
-
                 var result = await getDTOByKeyword(keyword);
                 if (result)
                 {
                     setSearchItemList();
                 }
+                else
+                {
+                    await setSerachNotFoundLabel();
+                }
             }
 
+        }
+
+        private async Task setSerachNotFoundLabel()
+        {
+            SearchResultNotFoundLabel.ForeColor = Color.Red;
+            SearchResultNotFoundLabel.Text = "Book not found";
+            await Task.Delay(1000);
+            SearchResultNotFoundLabel.Text = "";
         }
     }
 }

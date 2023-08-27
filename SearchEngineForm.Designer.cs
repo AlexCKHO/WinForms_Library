@@ -42,6 +42,7 @@
             SearchTextBox = new TextBox();
             SearchButton = new Button();
             MainPageBotton = new Button();
+            SearchResultNotFoundLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)searchItemList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bookSearchResultDTOBindingSource).BeginInit();
             SuspendLayout();
@@ -152,11 +153,21 @@
             MainPageBotton.UseVisualStyleBackColor = true;
             MainPageBotton.Click += MainPageBotton_Click;
             // 
+            // SearchResultNotFoundLabel
+            // 
+            SearchResultNotFoundLabel.AutoSize = true;
+            SearchResultNotFoundLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            SearchResultNotFoundLabel.Location = new Point(200, 35);
+            SearchResultNotFoundLabel.Name = "SearchResultNotFoundLabel";
+            SearchResultNotFoundLabel.Size = new Size(0, 30);
+            SearchResultNotFoundLabel.TabIndex = 4;
+            // 
             // SearchEngineForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(793, 686);
+            Controls.Add(SearchResultNotFoundLabel);
             Controls.Add(MainPageBotton);
             Controls.Add(SearchButton);
             Controls.Add(SearchTextBox);
@@ -186,5 +197,6 @@
         private TextBox SearchTextBox;
         private Button SearchButton;
         private Button MainPageBotton;
+        private Label SearchResultNotFoundLabel;
     }
 }
