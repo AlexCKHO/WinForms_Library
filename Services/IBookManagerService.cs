@@ -17,8 +17,10 @@ namespace EI_Task.Services
         Task<List<BookSearchResultDTO>> GetListOfBookSearchResultDTO(string bookName);
         Task DeleteBookAsync(int id);
         Task<Book> GetBookByIdAsync(int id);
+        Task<bool> UpdateBookPropertyAsync(int bookId, string propertyName, object newValue);
         Task<bool> UpdateBookName(int bookId, string newBookName);
         Task<bool> UpdateBookYear(int bookId, int newBookYear);
         Task<bool> UpdateAvailable(int bookId, bool available);
+
     }
 }

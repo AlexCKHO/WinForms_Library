@@ -62,6 +62,7 @@ namespace EI_Task
                     services.AddScoped<IAccountService, AccountsService>();
                     services.AddScoped<IUserManagerService, UserManagerService>();
                     services.AddScoped<IBookManagerService, BookManagerService>();
+                    services.AddScoped<IValidationService, ValidationService>();
                 });
         }
     }

@@ -90,7 +90,6 @@
             BookDataGrid.Size = new Size(546, 506);
             BookDataGrid.TabIndex = 1;
             BookDataGrid.CellClick += BookDataGrid_CellClick;
-            BookDataGrid.CellContentClick += BookDataGrid_CellContentClick;
             BookDataGrid.CellEndEdit += BookDataGrid_CellEndEdit;
             BookDataGrid.DataError += BookDataGrid_DataError;
             // 

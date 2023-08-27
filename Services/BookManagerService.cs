@@ -136,7 +136,7 @@ namespace EI_Task.Services
                 }
 
                 // Update the book's name
-                originalBook.Name = newBookName;
+                originalBook.Name = newBookName.Trim();
 
                 // Update the book in the database
                 await _bookService.UpdateAsync(bookId, originalBook);
@@ -269,6 +269,28 @@ namespace EI_Task.Services
 
             return resultList;
         }
+
+
+        // Add these methods to your BookManagerService class
+        public async Task<bool> UpdateBookPropertyAsync(int bookId, string propertyName, object newValue)
+        {
+
+
+            if (propertyName == "Name")
+            {
+                return await UpdateBookName(bookId, newValue.ToString());
+            }
+            else if (propertyName == "PublishedYear")
+            {
+                return await UpdateBookYear(bookId, Convert.ToInt32(newValue));
+            }
+            else if (propertyName == "Availability")
+            {
+                return await UpdateAvailable(bookId, Convert.ToBoolean(newValue));
+            }
+            return false;
+        }
+
 
 
 

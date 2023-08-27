@@ -10,14 +10,16 @@ namespace EI_Task
     {
 
         private readonly IBookManagerService _bookManagerService;
+        private readonly IValidationService _validationService;
         private List<Book> _allBooks = new List<Book>();
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         private string _originalValue;
-        public MainForm(IBookManagerService bookManagerService)
+        public MainForm(IBookManagerService bookManagerService, IValidationService validationService)
         {
             _bookManagerService = bookManagerService;
+            _validationService = validationService;
             InitializeComponent();
-
+            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -65,99 +67,60 @@ namespace EI_Task
 
         private async void BookDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            int rowIndex = e.RowIndex;
+            int colIndex = e.ColumnIndex;
+
+            
+
             if (e.ColumnIndex == BookDataGrid.Columns["btnDelete"].Index)
             {
                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this row?", "Delete Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    int rowIndex = e.RowIndex;
+                    rowIndex = e.RowIndex;
                     int bookId = Convert.ToInt32(BookDataGrid.Rows[rowIndex].Cells[0].Value);
 
                     await _bookManagerService.DeleteBookAsync(bookId);
 
                     GetListOfBook();
-                }
+                } 
             }
-        }
-
-        private void BookDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            int colIndex = e.ColumnIndex;
-
-            if (rowIndex != -1)
+            else if (rowIndex != -1)
             {
                 _originalValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value.ToString();
             }
         }
 
+
         private async void BookDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            // Get the edited row and column
             int rowIndex = e.RowIndex;
             int colIndex = e.ColumnIndex;
-
-            // Get the edited book's ID (it's in the first column)
             int bookId = Convert.ToInt32(BookDataGrid.Rows[rowIndex].Cells[0].Value);
-
-            // Get the new value
             object newValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value;
+            string columnName = BookDataGrid.Columns[colIndex].HeaderText;
 
-            if (newValue == null)
+            // Validate the new value using the Validation class
+            if (!_validationService.ValidateCellValue(columnName, newValue))
             {
-                MessageBox.Show("Invalid input. The field cannot be empty");
+                MessageBox.Show("Invalid input.");
                 BookDataGrid.Rows[rowIndex].Cells[colIndex].Value = _originalValue;
                 return;
             }
 
-            // Update the edited property
-            switch (colIndex)
+            var result = await _bookManagerService.UpdateBookPropertyAsync(bookId, columnName, newValue);
+            if (!result)
             {
-                case 1:
-                    if (String.IsNullOrWhiteSpace(newValue.ToString()))
-                    {
-                        MessageBox.Show("Invalid input. The name cannot be empty or only spaces.");
-                        BookDataGrid.Rows[rowIndex].Cells[colIndex].Value = _originalValue;
-                        return;
-                    }
-                    else
-                    {
-                        await _bookManagerService.UpdateBookName(bookId, newValue.ToString());
-                    }
-                    break;
-                case 2:
-                    int newYear;
-                    if (int.TryParse(newValue.ToString(), out newYear))
-                    {
-                        if (Validation.ValidatePublishedYear(newYear))
-                        {
-                            await _bookManagerService.UpdateBookYear(bookId, newYear);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid year. Please enter a year between 1 and the current year.");
-                            BookDataGrid.Rows[rowIndex].Cells[colIndex].Value = _originalValue;
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid input. Please enter a valid year.");
-                        BookDataGrid.Rows[rowIndex].Cells[colIndex].Value = _originalValue;
-                        return;
-                    }
-                    break;
-                case 3:
-                    await _bookManagerService.UpdateAvailable(bookId, (bool)newValue);
-                    break;
+                MessageBox.Show("Update failed.");
+                BookDataGrid.Rows[rowIndex].Cells[colIndex].Value = _originalValue;
             }
-            GetListOfBook();
 
+            GetListOfBook();
         }
 
         private async void AddBooksButton_Click(object sender, EventArgs e)
         {
-            if (Validation.AreAllInputsValid(this.Controls, errorProvider))
+            if (_validationService.MainFormAreAllInputsValid(this.Controls, errorProvider))
             {
                 var result = await CreateBook();
                 if (result)
@@ -212,7 +175,7 @@ namespace EI_Task
 
         private void BookDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show("Invalid input. The field cannot be empty or space only");
+            MessageBox.Show("Invalid input. The field cannot be empty or space only or Text");
         }
 
         private void NameTextBox_Validating(object sender, CancelEventArgs e)
@@ -237,7 +200,7 @@ namespace EI_Task
 
                 errorProvider.SetError(PublishYearTextBox, "Please enter Year !");
             }
-            else if (!Validation.ValidatePublishedYear(PublishYearTextBox.Text))
+            else if (!_validationService.ValidatePublishedYear(PublishYearTextBox.Text))
             {
                 errorProvider.SetError(PublishYearTextBox, "Invalid year. Please enter a year between 1 and the current year.");
 

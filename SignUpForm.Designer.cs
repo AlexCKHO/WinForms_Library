@@ -204,7 +204,6 @@
             ListOfBranch.Name = "ListOfBranch";
             ListOfBranch.Size = new Size(121, 23);
             ListOfBranch.TabIndex = 16;
-            ListOfBranch.SelectedIndexChanged += ListOfBranch_SelectedIndexChanged;
             ListOfBranch.Validating += ListOfBranch_Validating;
             // 
             // StatusLabel

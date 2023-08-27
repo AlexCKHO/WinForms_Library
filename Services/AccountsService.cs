@@ -24,7 +24,7 @@ namespace EI_Task.Services
                 
             if(ListOfAccounts.Count != 0)
             {
-                var ac = ListOfAccounts.FirstOrDefault(u => u?.Email == email && u?.Password == password);
+                var ac = ListOfAccounts.FirstOrDefault(u => u?.Email == email.ToLower() && u?.Password == password);
                 if (ac != null)
                 {
                     return ac.UserId;

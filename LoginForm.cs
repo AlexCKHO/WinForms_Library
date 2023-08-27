@@ -1,8 +1,7 @@
 using EI_Task.Data;
 using EI_Task.Models;
 using EI_Task.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.ApplicationServices;
+
 
 namespace EI_Task
 {
@@ -12,36 +11,27 @@ namespace EI_Task
         private readonly IAccountService _loginService;
         private readonly IUserManagerService _userManagerService;
         private readonly IBookManagerService _bookManagerService;
+        private readonly IValidationService _validation;
 
 
-        public LoginForm(ILibraryService<Book> booksService
-                    , IAccountService loginService
+        public LoginForm(
+                     IAccountService loginService
                     , IUserManagerService userManagerService
                     ,IBookManagerService bookManagerService
-
-
-
-            )
+                    , IValidationService validation)
         {
             _loginService = loginService;
             _userManagerService = userManagerService;
             _bookManagerService = bookManagerService;
+            _validation = validation;
             InitializeComponent();
-
+            
         }
-
-
-        private async void LoginForm_Load(object sender, EventArgs e)
-        {
-
-
-        }
-
 
 
         private async void LoginSubmitButton_Click(object sender, EventArgs e)
         {
-            string email = TextBoxEmail.Text.ToLower();
+            string email = TextBoxEmail.Text;
             string password = TextBoxPW.Text;
 
             int userId = await _loginService.LoginAsync(email, password);
@@ -53,14 +43,19 @@ namespace EI_Task
             }
             else
             {
-                LoginStatusLabel.ForeColor = Color.Red;
-                LoginStatusLabel.Text = "Login Attempt Failed";
+                loginAttemptFailedLable();
             }
+        }
+
+        private void loginAttemptFailedLable()
+        {
+            LoginStatusLabel.ForeColor = Color.Red;
+            LoginStatusLabel.Text = "Login Attempt Failed";
         }
 
         private void SignUpFormButton_Click(object sender, EventArgs e)
         {
-            SignUpForm signUpForm = new SignUpForm(_userManagerService);
+            SignUpForm signUpForm = new SignUpForm(_userManagerService, _validation);
             this.Hide();
             signUpForm.ShowDialog();
             this.Show();
@@ -80,7 +75,7 @@ namespace EI_Task
 
         private void ShowMainForm()
         {
-            MainForm mainForm = new MainForm(_bookManagerService);
+            MainForm mainForm = new MainForm(_bookManagerService, _validation);
             this.Hide();
             mainForm.ShowDialog();
             this.Show();

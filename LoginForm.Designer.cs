@@ -125,7 +125,6 @@
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Please Login";
-            Load += LoginForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

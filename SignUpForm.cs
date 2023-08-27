@@ -8,39 +8,57 @@ namespace EI_Task
     public partial class SignUpForm : Form
     {
         private readonly IUserManagerService _userManagerService;
+        private readonly IValidationService _validationService;
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
-        public SignUpForm(IUserManagerService userManagerService)
+        public SignUpForm(IUserManagerService userManagerService, IValidationService validationService)
         {
             _userManagerService = userManagerService;
+            _validationService = validationService;
             InitializeComponent();
+            
         }
 
         private async void SignUpForm_Load(object sender, EventArgs e)
+        {
+            await setUpListOfBranch();
+        }
+
+        private async Task setUpListOfBranch()
         {
             await GetBranchNameAndId();
             ListOfBranch.Items.Clear();
             ListOfBranch.Items.AddRange(_branchNameAndId.Keys.ToArray());
         }
 
-
         private async void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (AreAllInputsValid())
+            if (_validationService.SignUpFormAreAllInputsValid(this.Controls, errorProvider))
             {
                 var result = await CreateUser();
                 if (result)
                 {
+                    successfulRegister();
                     ResetAllTextBoxes();
-                    StatusLabel.ForeColor = Color.Green;
-                    StatusLabel.Text = "Successfully Registered";
+                    
                 }
             }
             else
             {
-                StatusLabel.ForeColor = Color.Red;
-                StatusLabel.Text = "Please fill in correct information";
+                unsuccessfulRegister();
             }
 
+        }
+
+        private void successfulRegister()
+        {
+            StatusLabel.ForeColor = Color.Green;
+            StatusLabel.Text = "Successfully Registered";
+        }
+
+        private void unsuccessfulRegister()
+        {
+            StatusLabel.ForeColor = Color.Red;
+            StatusLabel.Text = "Please fill in correct information";
         }
 
         private async Task<bool> CreateUser()
@@ -98,29 +116,23 @@ namespace EI_Task
 
 
 
-        private void ListOfBranch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
+       
 
         private void EmailTextBox_Validating(object sender, CancelEventArgs e)
         {
             string email = EmailTextBox.Text.ToLower();
-
-            string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
 
             if (string.IsNullOrWhiteSpace(email))
             {
 
                 errorProvider.SetError(EmailTextBox, "Please enter an email address!");
             }
-            else if (!Regex.IsMatch(email, pattern))
+            else if (!_validationService.ValidatingEmailInput(email))
             {
-
                 errorProvider.SetError(EmailTextBox, "Invalid email format!");
             }
             else
             {
-
                 errorProvider.SetError(EmailTextBox, null);
             }
         }
@@ -129,7 +141,7 @@ namespace EI_Task
         {
             string password = PasswordTextBox.Text;
 
-            if (!Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d\d)(?=.*[@$!%*#?&.])[^ ]{7,}$"))
+            if (!_validationService.ValidatingPasswordInput(password))
             {
 
                 errorProvider.SetError(PasswordTextBox, "Password must not contain spaces, and should have at least 7 characters, 2 numbers, and a special character!");
@@ -192,7 +204,7 @@ namespace EI_Task
                 int.TryParse(MonthTextBox.Text, out int month) &&
                 int.TryParse(YearTextBox.Text, out int year))
             {
-                if (IsValidDate(day, month, year))
+                if (_validationService.IsValidDate(day, month, year))
                 {
                     errorProvider.SetError(DateTextBox, null);
                     errorProvider.SetError(MonthTextBox, null);
@@ -213,48 +225,9 @@ namespace EI_Task
             }
         }
 
-        private bool IsValidDate(int day, int month, int year)
-        {
-            // Check if year, month and day form a valid date
-            if (year < 1900 || year > DateTime.Now.Year)
-            {
-                return false;
-            }
-
-            if (month < 1 || month > 12)
-            {
-                return false;
-            }
-
-            int maxDay = DateTime.DaysInMonth(year, month);
-
-            if (day < 1 || day > maxDay)
-            {
-                return false;
-            }
-
-            return true;
-        }
 
 
-        private bool AreAllInputsValid()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is System.Windows.Forms.TextBox || control is System.Windows.Forms.ComboBox)
-                {
-                    if (String.IsNullOrEmpty(control.Text))
-                    {
-                        return false;
-                    }
-                    string errorMessage = errorProvider.GetError(control);
-                    if (!string.IsNullOrEmpty(errorMessage))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
+
+
     }
 }
