@@ -1,5 +1,6 @@
 ﻿using EI_Task.Models;
 using Microsoft.Extensions.DependencyInjection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace EI_Task.Data
 {
@@ -18,6 +19,43 @@ namespace EI_Task.Data
                 context.SaveChanges();
 
             }
+
+            #region Adding_Branches
+
+            var listOfbranches = new List<Models.Branch>
+            {
+                new Models.Branch
+                {
+                    BranchName = "Testing1",
+                    Address = "TestingAddress1",
+                    NumberOfActiveUsers = 1,
+                    NumberOfAvailableBooks = 0,
+                    OpeningHours = "09:00 to 22:00"
+                },
+                new Models.Branch
+                {
+                    BranchName = "Testing2",
+                    Address = "TestingAddress2",
+                    NumberOfActiveUsers = 1,
+                    NumberOfAvailableBooks = 0,
+                    OpeningHours = "09:30 to 22:30"
+                },
+                new Models.Branch
+                {
+                    BranchName = "Testing3",
+                    Address = "TestingAddress3",
+                    NumberOfActiveUsers = 1,
+                    NumberOfAvailableBooks = 0,
+                    OpeningHours = "09:30 to 22:30"
+                }
+            };
+
+
+            context.Branches.AddRange(listOfbranches);
+            context.SaveChanges();
+
+            #endregion
+
             #region Adding_Accounts_And_Users
             var account1 = new Account();
             account1.Email = "1";
@@ -28,6 +66,7 @@ namespace EI_Task.Data
             user1.Name = "Testing User1";
             user1.Email = account1.Email;
             user1.DateOfBirth = new DateTime(2011, 12, 09);
+            user1.BranchId = listOfbranches[0].BranchId;
 
             var account2 = new Account();
             account2.Email = "testing2@testing.com";
@@ -38,6 +77,7 @@ namespace EI_Task.Data
             user2.Name = "Testing User2";
             user2.Email = account2.Email;
             user2.DateOfBirth = new DateTime(2012, 11, 09);
+            user2.BranchId = listOfbranches[1].BranchId;
 
             var account3 = new Account();
             account3.Email = "testing3@testing.com";
@@ -48,7 +88,7 @@ namespace EI_Task.Data
             user3.Name = "Testing User3";
             user3.Email = account3.Email;
             user3.DateOfBirth = new DateTime(2013, 10, 09);
-
+            user3.BranchId = listOfbranches[2].BranchId;
 
             context.Accounts.AddRange(account1, account2, account3);
             context.Users.AddRange(user1, user2, user3);
@@ -68,41 +108,6 @@ namespace EI_Task.Data
 
             #endregion
 
-            #region Adding_Branches
-
-            var listOfbranches = new List<Branch>
-            {
-                new Branch
-                {
-                    BranchName = "Testing1",
-                    Address = "TestingAddress1",
-                    NumberOfActiveUsers = 0,
-                    NumberOfAvailableBooks = 0,
-                    OpeningHours = "09:00 to 22:00"
-                },
-                new Branch
-                {
-                    BranchName = "Testing2",
-                    Address = "TestingAddress2",
-                    NumberOfActiveUsers = 0,
-                    NumberOfAvailableBooks = 0,
-                    OpeningHours = "09:30 to 22:30"
-                },
-                new Branch
-                {
-                    BranchName = "Testing3",
-                    Address = "TestingAddress3",
-                    NumberOfActiveUsers = 0,
-                    NumberOfAvailableBooks = 0,
-                    OpeningHours = "09:30 to 22:30"
-                }
-            };
-
-
-            context.Branches.AddRange(listOfbranches);
-            context.SaveChanges();
-
-            #endregion
 
             #region Adding_Books
             var ListOfBooks = new List<Book>

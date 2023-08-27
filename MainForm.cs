@@ -139,7 +139,7 @@ namespace EI_Task
                     int newYear;
                     if (int.TryParse(newValue.ToString(), out newYear))
                     {
-                        if (ValidatePublishedYear(newYear))
+                        if (Validation.ValidatePublishedYear(newYear))
                         {
                             editedBook.PublishedYear = newYear;
                         }
@@ -167,7 +167,7 @@ namespace EI_Task
 
         private async void AddBooksButton_Click(object sender, EventArgs e)
         {
-            if (AreAllInputsValid())
+            if (Validation.AreAllInputsValid(this.Controls, errorProvider))
             {
                 var result = await CreateBook();
                 if (result)
@@ -238,7 +238,7 @@ namespace EI_Task
 
                 errorProvider.SetError(PublishYearTextBox, "Please enter Year !");
             }
-            else if (!ValidatePublishedYear(int.Parse(PublishYearTextBox.Text)))
+            else if (!Validation.ValidatePublishedYear(PublishYearTextBox.Text))
             {
                 errorProvider.SetError(PublishYearTextBox, "Invalid year. Please enter a year between 1 and the current year.");
 
@@ -249,39 +249,6 @@ namespace EI_Task
             }
         }
 
-
-        private bool ValidatePublishedYear(int year)
-        {
-            int currentYear = DateTime.Now.Year;
-            if (year >= 1 && year <= currentYear && year != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private bool AreAllInputsValid()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is System.Windows.Forms.TextBox || control is System.Windows.Forms.ComboBox && control.Name != "ListOfBranch")
-                {
-                    if (String.IsNullOrEmpty(control.Text))
-                    {
-                        return false;
-                    }
-                    string errorMessage = errorProvider.GetError(control);
-                    if (!string.IsNullOrEmpty(errorMessage))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
 
 
     }

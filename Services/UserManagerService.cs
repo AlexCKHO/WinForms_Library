@@ -12,41 +12,37 @@ namespace EI_Task.Services
     public class UserManagerService : IUserManagerService
     {
         private readonly ILogger _logger;
-        private readonly ILibraryRepository<User> _userRepository;
-        private readonly ILibraryRepository<Account> _accountRepository;
-        private readonly ILibraryRepository<Branch> _branchRepository;
+        private readonly ILibraryService<User> _userService;
+        private readonly ILibraryService<Account> _accountService;
+        private readonly ILibraryService<Branch> _branchService;
 
-        public UserManagerService(ILogger<IUserManagerService> logger, ILibraryRepository<User> userRepository, ILibraryRepository<Account> accountRepository, ILibraryRepository<Branch> branchRepository)
+        public UserManagerService(ILogger<IUserManagerService> logger, ILibraryService<User> userService, ILibraryService<Account> accountService, ILibraryService<Branch> branchService)
         {
             _logger = logger;
-            _userRepository = userRepository;
-            _accountRepository = accountRepository;
-            _branchRepository = branchRepository;
+            _userService = userService;
+            _accountService = accountService;
+            _branchService = branchService;
         }
 
         public async Task<bool> CreateUserAndAccount(string name, DateTime DOB, string email, string Address, int PMBId, string password)
         {
-            try { 
-            Account account = new Account();
-            account.Email = email;
-            account.Password = password;
+            try
+            {
 
-            User user = new User();
-            user.Address = Address;
-            user.Name = name;
-            user.Email = email;
-            user.DateOfBirth = DOB;
-            user.BranchId = PMBId;
+                Account account = await createAccountAsync(email, password);
+                User user = await createUserAsync(name, DOB, email, Address, PMBId);
 
-            _accountRepository.Add(account);
-            _userRepository.Add(user);
-            await _userRepository.SaveAsync();
+               bool updateAcctAndUserIdResult = await updateAcctAndUserId(user, account);
+               bool updateupdateBranchUser = await updateBranchUser(PMBId);
 
-            user.AccountId = account.AccountId;
-            account.UserId = user.UserId;
-
-            await _userRepository.SaveAsync();
-            return true;
+                if(updateAcctAndUserIdResult && updateupdateBranchUser)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
@@ -57,13 +53,71 @@ namespace EI_Task.Services
             }
         }
 
-        public async Task<Dictionary<string,int>> GetBranchNameAndId()
+        private async Task<Account> createAccountAsync(string email, string password)
         {
-            IEnumerable<Branch> branches = await _branchRepository.GetAllAsync();
+            Account account = new Account();
+            account.Email = email;
+            account.Password = password;
+
+            await _accountService.CreateAsync(account);
+
+            return account;
+        }
+
+        private async Task<User> createUserAsync(string name, DateTime DOB, string email, string Address, int PMBId)
+        {
+            User user = new User();
+            user.Address = Address;
+            user.Name = name;
+            user.Email = email;
+            user.DateOfBirth = DOB;
+            user.BranchId = PMBId;
+
+            await _userService.CreateAsync(user);
+
+            return user;
+        }
+
+        private async Task<bool> updateAcctAndUserId(User user, Account account)
+        {
+            try
+            {
+                user.AccountId = account.AccountId;
+                account.UserId = user.UserId;
+
+                await _accountService.UpdateAsync(account.AccountId, account);
+                await _userService.UpdateAsync(user.UserId, user);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"{ex}");
+
+                return false;
+            }
+
+        }
+        public async Task<Dictionary<string, int>> GetBranchNameAndId()
+        {
+            IEnumerable<Branch> branches = await _branchService.GetAllAsync();
 
             Dictionary<string, int> branchIdDictionary = branches.ToDictionary(branch => branch.BranchName, branch => branch.BranchId);
 
             return branchIdDictionary;
+        }
+
+        private async Task<bool> updateBranchUser(int PMBId)
+        {
+            var updateBranch = await _branchService.GetAsync(PMBId);
+            if(updateBranch != null) {
+                updateBranch.NumberOfActiveUsers++;
+                await _branchService.UpdateAsync(PMBId, updateBranch);
+                return true;
+            }
+
+            return false;
+            
+
         }
 
     }
