@@ -243,6 +243,33 @@ namespace EI_Task.Services
             return resultList;
         }
 
+        public async Task<List<BookSearchResultDTO>> GetListOfBookSearchResultDTO(string bookName)
+        {
+            List<BookSearchResultDTO> resultList = new List<BookSearchResultDTO>();
+
+            // Filter books based on the input book name
+            var books = (await _bookService.GetAllAsync()).Where(book => book.Name.Contains(bookName, StringComparison.OrdinalIgnoreCase)).ToList();
+            var branches = await _branchService.GetAllAsync();
+
+            Dictionary<int, Branch> branchDictionary = branches.ToDictionary(branch => branch.BranchId, branch => branch);
+
+            foreach (var book in books)
+            {
+                if (branchDictionary.ContainsKey(book.BranchId))
+                {
+                    var branch = branchDictionary[book.BranchId];
+                    var dto = Utiles.CreateBookSearchResultDTO(book, branch);
+                    resultList.Add(dto);
+                }
+                else
+                {
+                    _logger.LogWarning($"Branch not found for book with ID {book.BookId}");
+                }
+            }
+
+            return resultList;
+        }
+
 
 
     }

@@ -14,6 +14,7 @@ namespace EI_Task.Services
         Task<Dictionary<string, int>> GetBranchNameAndIdAsync();
         Task<List<Book>> GetListOfBookAsync();
         Task<List<BookSearchResultDTO>> GetListOfBookSearchResultDTO();
+        Task<List<BookSearchResultDTO>> GetListOfBookSearchResultDTO(string bookName);
         Task DeleteBookAsync(int id);
         Task<Book> GetBookByIdAsync(int id);
         Task<bool> UpdateBookName(int bookId, string newBookName);

@@ -238,10 +238,10 @@ namespace EI_Task
 
         private void SearchFormButton_Click(object sender, EventArgs e)
         {
-            SearchEngineForm form = new SearchEngineForm();
+            SearchEngineForm form = new SearchEngineForm(_bookManagerService);
             this.Hide();
             form.ShowDialog();
-            this.Close();
+            this.Show();
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)
