@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,16 +24,16 @@ namespace EI_Task.Services
 
         public async Task<bool> CreateBookAsync(string name, int publishedYear, bool availability, int branchId)
         {
-            bool createBookInDbAsyncResult =  await createBookInDbAsync(name, publishedYear, availability, branchId);
+            bool createBookInDbAsyncResult = await createBookInDbAsync(name, publishedYear, availability, branchId);
             if (availability)
             {
-            return await updateBranchBook(branchId);
+                return await addBranchAvailableBook(branchId);
             }
             return createBookInDbAsyncResult;
 
         }
 
-        private async Task<bool> updateBranchBook(int branchId)
+        private async Task<bool> addBranchAvailableBook(int branchId)
         {
             var updateBranch = await _branchService.GetAsync(branchId);
             if (updateBranch != null)
@@ -43,20 +44,33 @@ namespace EI_Task.Services
             }
 
             return false;
+        }
 
+        private async Task<bool> minusBranchAvailableBook(int branchId)
+        {
+            var updateBranch = await _branchService.GetAsync(branchId);
+            if (updateBranch != null)
+            {
+                updateBranch.NumberOfAvailableBooks--;
+                await _branchService.UpdateAsync(branchId, updateBranch);
+                return true;
+            }
+
+            return false;
         }
         private async Task<bool> createBookInDbAsync(string name, int publishedYear, bool availability, int branchId)
         {
-            try { 
-            var book = new Book();
-            book.Name = name;
-            book.PublishedYear = publishedYear;
-            book.Availability = availability;
-            book.BranchId = branchId;
-            
-            await _bookService.CreateAsync(book);
-            return true;
-            } 
+            try
+            {
+                var book = new Book();
+                book.Name = name;
+                book.PublishedYear = publishedYear;
+                book.Availability = availability;
+                book.BranchId = branchId;
+
+                await _bookService.CreateAsync(book);
+                return true;
+            }
             catch (Exception ex)
             {
                 _logger.LogWarning($"{ex}");
@@ -72,6 +86,68 @@ namespace EI_Task.Services
             Dictionary<string, int> branchIdDictionary = branches.ToDictionary(branch => branch.BranchName, branch => branch.BranchId);
 
             return branchIdDictionary;
+        }
+
+        public async Task<List<Book>> GetListOfBookAsync()
+        {
+
+
+           return (await _bookService.GetAllAsync()).ToList();
+
+        }
+        public async Task DeleteBookAsync(int id)
+        {
+            var book = await GetBookByIdAsync(id);
+
+            if (book.Availability)
+            {
+               await minusBranchAvailableBook(book.BranchId);
+            }
+
+           await _bookService.DeleteAsync(id);
+        }
+
+        public async Task<Book> GetBookByIdAsync(int id)
+        {
+            try
+            {  
+                return await _bookService.GetAsync(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"Failed to get book by ID {id}: {ex}");
+                return null;
+            }
+        }
+
+        public async Task<bool> UpdateBookByIdAsync(int bookId, Book updatedBook)
+        {
+            var originalBook = await GetBookByIdAsync(bookId);
+
+            bool originalBookAvailable = originalBook.Availability;
+            bool newBookAvailable = updatedBook.Availability;
+
+            if (originalBookAvailable && !newBookAvailable)
+            {
+               await minusBranchAvailableBook(originalBook.BranchId);
+            }
+            else if(!originalBookAvailable && newBookAvailable)
+            {
+               await addBranchAvailableBook(originalBook.BranchId);
+            }
+
+            try
+            {
+
+                await _bookService.UpdateAsync(bookId, updatedBook);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"Failed to update book with ID {bookId}: {ex}");
+                return false;
+            }
+            
         }
     }
 }

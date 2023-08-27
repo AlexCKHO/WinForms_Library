@@ -14,16 +14,13 @@ namespace EI_Task
 {
     public partial class MainForm : Form
     {
-        private readonly ILibraryService<Book> _booksService;
-        private readonly IUserManagerService _userManagerService;
+
         private readonly IBookManagerService _bookManagerService;
         private List<Book> _allBooks = new List<Book>();
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         private string _originalValue;
-        public MainForm(ILibraryService<Book> booksService, IUserManagerService userManagerService, IBookManagerService bookManagerService)
+        public MainForm(IBookManagerService bookManagerService)
         {
-            _booksService = booksService;
-            _userManagerService = userManagerService;
             _bookManagerService = bookManagerService;
             InitializeComponent();
            
@@ -47,12 +44,12 @@ namespace EI_Task
 
         private async Task GetBranchNameAndId()
         {
-            _branchNameAndId = await _userManagerService.GetBranchNameAndId();
+            _branchNameAndId = await _bookManagerService.GetBranchNameAndIdAsync();
 
         }
         private async void GetListOfBook()
         {
-            _allBooks = (await _booksService.GetAllAsync()).ToList();
+            _allBooks = await _bookManagerService.GetListOfBookAsync();
             BookDataGrid.DataSource = _allBooks;
         }
 
@@ -82,7 +79,7 @@ namespace EI_Task
                     int rowIndex = e.RowIndex;
                     int bookId = Convert.ToInt32(BookDataGrid.Rows[rowIndex].Cells[0].Value);
 
-                    await _booksService.DeleteAsync(bookId);
+                    await _bookManagerService.DeleteBookAsync(bookId);
 
                     GetListOfBook();
                 }
@@ -120,7 +117,9 @@ namespace EI_Task
             }
 
             // Find the corresponding book from the data source
-            Book editedBook = await _booksService.GetAsync(bookId);
+            Book editedBook = new Book();
+
+            editedBook =  await _bookManagerService.GetBookByIdAsync(bookId);
 
             // Update the edited property
             switch (colIndex)
@@ -164,7 +163,7 @@ namespace EI_Task
                     break;
             }
 
-            await _booksService.UpdateAsync(bookId, editedBook);
+            await _bookManagerService.UpdateBookByIdAsync(bookId, editedBook);
         }
 
         private async void AddBooksButton_Click(object sender, EventArgs e)

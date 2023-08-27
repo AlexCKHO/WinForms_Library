@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EI_Task.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,9 @@ namespace EI_Task.Services
     {
         Task<bool> CreateBookAsync(string name, int publishedYear, bool availability, int branchId);
         Task<Dictionary<string, int>> GetBranchNameAndIdAsync();
+        Task<List<Book>> GetListOfBookAsync();
+        Task DeleteBookAsync(int id);
+        Task<Book> GetBookByIdAsync(int id);
+        Task<bool> UpdateBookByIdAsync(int id, Book updatedBook);
     }
 }
