@@ -33,9 +33,9 @@ namespace EI_Task.Services
                 User user = await createUserAsync(name, DOB, email, Address, PMBId);
 
                bool updateAcctAndUserIdResult = await updateAcctAndUserId(user, account);
-               bool updateupdateBranchUser = await updateBranchUser(PMBId);
+               bool updateBranchUser = await this.updateBranchUser(PMBId);
 
-                if(updateAcctAndUserIdResult && updateupdateBranchUser)
+                if(updateAcctAndUserIdResult && updateBranchUser)
                 {
                     return true;
                 }
@@ -54,6 +54,7 @@ namespace EI_Task.Services
 
             }
         }
+
 
         private async Task<Account> createAccountAsync(string email, string password)
         {
@@ -118,8 +119,16 @@ namespace EI_Task.Services
             }
 
             return false;
-            
 
+        }
+
+        public async Task<bool> hasDuplicateEmail(string email)
+        {
+            var accounts = await _accountService.GetAllAsync();
+
+            bool isDuplicate = accounts.Any(account => account.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+
+            return isDuplicate;
         }
 
     }

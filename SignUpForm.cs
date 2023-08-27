@@ -34,6 +34,12 @@ namespace EI_Task
         {
             if (_validationService.SignUpFormAreAllInputsValid(this.Controls, errorProvider))
             {
+                if (await _userManagerService.hasDuplicateEmail(EmailTextBox.Text))
+                {
+                    duplicateEmail();
+                    return;
+                }
+
                 var result = await CreateUser();
                 if (result)
                 {
@@ -59,6 +65,11 @@ namespace EI_Task
         {
             StatusLabel.ForeColor = Color.Red;
             StatusLabel.Text = "Please fill in correct information";
+        }
+        private void duplicateEmail()
+        {
+            StatusLabel.ForeColor = Color.Red;
+            StatusLabel.Text = "Email Already exists";
         }
 
         private async Task<bool> CreateUser()

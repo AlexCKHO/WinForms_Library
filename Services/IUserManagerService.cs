@@ -10,5 +10,6 @@ namespace EI_Task.Services
     {
         Task<bool> CreateUserAndAccount(string name, DateTime DOB, string email, string Address, int PMBId, string password);
         Task<Dictionary<string, int>> GetBranchNameAndId();
+        Task<bool> hasDuplicateEmail(string email);
     }
 }
