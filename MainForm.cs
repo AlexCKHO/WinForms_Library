@@ -163,19 +163,31 @@ namespace EI_Task
                 if (result)
                 {
 
-                    StatusLabel.ForeColor = Color.Green;
-                    StatusLabel.Text = "Successfully Added New Book";
-                    ResetAllTextBoxes();
+                    successfulStatusLabel();
                     GetListOfBook();
-                    ListOfBranch.SelectedIndex = 0;
+                    ResetAllTextBoxes();
+                    
                 }
             }
             else
             {
-                StatusLabel.ForeColor = Color.Red;
-                StatusLabel.Text = "Please fill in correct information";
+                unsuccessfulStatusLabel();
             }
         }
+
+        private void successfulStatusLabel()
+        {
+            StatusLabel.ForeColor = Color.Green;
+            StatusLabel.Text = "Successfully Added New Book";
+        }
+
+        private void unsuccessfulStatusLabel()
+        {
+            StatusLabel.ForeColor = Color.Red;
+            StatusLabel.Text = "Please fill in correct information";
+        }
+
+
 
         private void ResetAllTextBoxes()
         {
