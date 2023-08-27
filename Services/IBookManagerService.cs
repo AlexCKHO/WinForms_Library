@@ -1,4 +1,5 @@
 ﻿using EI_Task.Models;
+using EI_Task.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace EI_Task.Services
         Task<bool> CreateBookAsync(string name, int publishedYear, bool availability, int branchId);
         Task<Dictionary<string, int>> GetBranchNameAndIdAsync();
         Task<List<Book>> GetListOfBookAsync();
+        Task<List<BookSearchResultDTO>> GetListOfBookSearchResultDTO();
         Task DeleteBookAsync(int id);
         Task<Book> GetBookByIdAsync(int id);
         Task<bool> UpdateBookName(int bookId, string newBookName);
