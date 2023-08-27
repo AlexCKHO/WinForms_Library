@@ -61,6 +61,7 @@ namespace EI_Task
                     services.AddScoped(typeof(ILibraryService<>), typeof(LibraryService<>));
                     services.AddScoped<IAccountService, AccountsService>();
                     services.AddScoped<IUserManagerService, UserManagerService>();
+                    services.AddScoped<IBookManagerService, BookManagerService>();
                 });
         }
     }

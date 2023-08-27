@@ -12,19 +12,25 @@ namespace EI_Task
 
         private readonly IAccountService _loginService;
         private readonly IUserManagerService _userManagerService;
+        private readonly IBookManagerService _bookManagerService;
 
 
         public LoginForm(ILibraryService<Book> booksService
                     , IAccountService loginService
                     , IUserManagerService userManagerService
+,
+IBookManagerService bookManagerService
+
+
 
             )
         {
             _booksService = booksService;
             _loginService = loginService;
             _userManagerService = userManagerService;
+            _bookManagerService = bookManagerService;
             InitializeComponent();
-           
+            
         }
 
 
@@ -39,13 +45,13 @@ namespace EI_Task
         private async void LoginSubmitButton_Click(object sender, EventArgs e)
         {
             string email = TextBoxEmail.Text.ToLower();
-            string password = TextBoxPW.Text.ToLower();
+            string password = TextBoxPW.Text;
 
             int userId = await _loginService.LoginAsync(email, password);
 
             if (userId != -1)
             {
-                MainForm mainForm = new MainForm(_booksService, _userManagerService);
+                MainForm mainForm = new MainForm(_booksService, _userManagerService, _bookManagerService);
                 this.Hide();
                 mainForm.ShowDialog();
                 this.Close();

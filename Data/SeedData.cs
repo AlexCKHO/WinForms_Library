@@ -29,7 +29,7 @@ namespace EI_Task.Data
                     BranchName = "Testing1",
                     Address = "TestingAddress1",
                     NumberOfActiveUsers = 1,
-                    NumberOfAvailableBooks = 0,
+                    NumberOfAvailableBooks = 4,
                     OpeningHours = "09:00 to 22:00"
                 },
                 new Models.Branch
@@ -37,7 +37,7 @@ namespace EI_Task.Data
                     BranchName = "Testing2",
                     Address = "TestingAddress2",
                     NumberOfActiveUsers = 1,
-                    NumberOfAvailableBooks = 0,
+                    NumberOfAvailableBooks = 3,
                     OpeningHours = "09:30 to 22:30"
                 },
                 new Models.Branch
@@ -45,7 +45,7 @@ namespace EI_Task.Data
                     BranchName = "Testing3",
                     Address = "TestingAddress3",
                     NumberOfActiveUsers = 1,
-                    NumberOfAvailableBooks = 0,
+                    NumberOfAvailableBooks = 3,
                     OpeningHours = "09:30 to 22:30"
                 }
             };

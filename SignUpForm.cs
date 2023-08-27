@@ -104,7 +104,7 @@ namespace EI_Task
 
         private void EmailTextBox_Validating(object sender, CancelEventArgs e)
         {
-            string email = EmailTextBox.Text;
+            string email = EmailTextBox.Text.ToLower();
 
             string pattern = @"^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$";
 

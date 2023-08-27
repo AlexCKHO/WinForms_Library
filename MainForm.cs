@@ -16,15 +16,17 @@ namespace EI_Task
     {
         private readonly ILibraryService<Book> _booksService;
         private readonly IUserManagerService _userManagerService;
+        private readonly IBookManagerService _bookManagerService;
         private List<Book> _allBooks = new List<Book>();
         private Dictionary<string, int> _branchNameAndId = new Dictionary<string, int>();
         private string _originalValue;
-        public MainForm(ILibraryService<Book> booksService, IUserManagerService userManagerService)
+        public MainForm(ILibraryService<Book> booksService, IUserManagerService userManagerService, IBookManagerService bookManagerService)
         {
             _booksService = booksService;
             _userManagerService = userManagerService;
+            _bookManagerService = bookManagerService;
             InitializeComponent();
-
+           
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -198,13 +200,13 @@ namespace EI_Task
 
         private async Task<bool> CreateBook()
         {
-            var book = new Book();
-            book.Name = NameTextBox.Text;
-            book.PublishedYear = int.Parse(PublishYearTextBox.Text);
-            book.Availability = AvailableCheckBox.Checked;
-            book.BranchId = _branchNameAndId.FirstOrDefault(x => x.Key == LocationList.Text).Value;
 
-            return await _booksService.CreateAsync(book);
+            string name = NameTextBox.Text;
+            int publishedYear = int.Parse(PublishYearTextBox.Text);
+            bool availability = AvailableCheckBox.Checked;
+            int branchId = _branchNameAndId.FirstOrDefault(x => x.Key == LocationList.Text).Value;
+
+            return await _bookManagerService.CreateBookAsync(name, publishedYear, availability, branchId);
 
         }
 

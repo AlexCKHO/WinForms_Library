@@ -13,17 +13,16 @@ namespace EI_Task.Services
 
         public static bool ValidatePublishedYear(object input)
         {
-            int year = Convert.ToInt32(input);
+            if (input is string inputString && int.TryParse(inputString, out int year))
+            {
+                int currentYear = DateTime.Now.Year;
+                if (year >= 1 && year <= currentYear)
+                {
+                    return true;
+                }
+            }
 
-            int currentYear = DateTime.Now.Year;
-            if (year >= 1 && year <= currentYear && year != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool AreAllInputsValid(Control.ControlCollection controls, ErrorProvider errorProvider)
