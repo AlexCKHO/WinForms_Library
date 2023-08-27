@@ -72,9 +72,16 @@ namespace EI_Task
                 await getEveryDTO();
                 setSearchItemList();
             }
-            await _bookManagerService.GetListOfBookSearchResultDTO(keyword);
-            //filter book will name
-            //updateList
+            else
+            {
+
+                var result = await getDTOByKeyword(keyword);
+                if (result)
+                {
+                    setSearchItemList();
+                }
+            }
+
         }
     }
 }
