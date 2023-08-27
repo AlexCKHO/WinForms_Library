@@ -1,4 +1,5 @@
 ﻿using EI_Task.Models;
+using EI_Task.Models.DTO;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -182,7 +183,6 @@ namespace EI_Task.Services
         {
 
 
-            
             try
             {
                 var originalBook = await GetBookByIdAsync(bookId);
@@ -214,6 +214,33 @@ namespace EI_Task.Services
                 _logger.LogWarning($"Failed to update book name with ID {bookId}: {ex}");
                 return false;
             }
+        }
+
+
+        public async Task<List<BookSearchResultDTO>> GetListOfBookSearchResultDTO()
+        {
+            List<BookSearchResultDTO> resultList = new List<BookSearchResultDTO>();
+
+            var books = await _bookService.GetAllAsync();
+            var branches = await _branchService.GetAllAsync();
+
+            Dictionary<int, Branch> branchDictionary = branches.ToDictionary(branch => branch.BranchId, branch => branch);
+
+            foreach (var book in books)
+            {
+                if (branchDictionary.ContainsKey(book.BranchId))
+                {
+                    var branch = branchDictionary[book.BranchId];
+                    var dto = Utiles.CreateBookSearchResultDTO(book, branch);
+                    resultList.Add(dto);
+                }
+                else
+                {
+                    _logger.LogWarning($"Branch not found for book with ID {book.BookId}");
+                }
+            }
+
+            return resultList;
         }
 
 

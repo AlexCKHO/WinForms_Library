@@ -17,8 +17,7 @@ namespace EI_Task
         public LoginForm(ILibraryService<Book> booksService
                     , IAccountService loginService
                     , IUserManagerService userManagerService
-,
-IBookManagerService bookManagerService
+                    ,IBookManagerService bookManagerService
 
 
 
@@ -49,10 +48,8 @@ IBookManagerService bookManagerService
 
             if (userId != -1)
             {
-                MainForm mainForm = new MainForm(_bookManagerService);
-                this.Hide();
-                mainForm.ShowDialog();
-                this.Close();
+                ResetAllTextBoxes();
+                ShowMainForm();
             }
             else
             {
@@ -70,9 +67,23 @@ IBookManagerService bookManagerService
 
         }
 
+        private void ResetAllTextBoxes()
+        {
+            TextBoxEmail.Text = String.Empty;
+            TextBoxPW.Text = String.Empty;
+        }
+
         private void TextBoxPW_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = (e.KeyChar == (char)Keys.Space);
+        }
+
+        private void ShowMainForm()
+        {
+            MainForm mainForm = new MainForm(_bookManagerService);
+            this.Hide();
+            mainForm.ShowDialog();
+            this.Show();
         }
     }
 }

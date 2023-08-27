@@ -236,7 +236,17 @@ namespace EI_Task
             }
         }
 
+        private void SearchFormButton_Click(object sender, EventArgs e)
+        {
+            SearchEngineForm form = new SearchEngineForm();
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
 
-
+        private void LogOutButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

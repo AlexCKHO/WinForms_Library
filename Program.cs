@@ -55,7 +55,7 @@ namespace EI_Task
                 .ConfigureServices((context, services) => {
                     services.AddTransient<LoginForm>();
                     services.AddDbContext<LibraryDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
                     services.AddScoped<ILibraryRepository<Book>, BooksRepository>();
                     services.AddScoped(typeof(ILibraryRepository<>), typeof(LibraryRepository<>));
                     services.AddScoped(typeof(ILibraryService<>), typeof(LibraryService<>));

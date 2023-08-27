@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             BookDataGrid = new DataGridView();
             BookId = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -49,6 +49,8 @@
             errorProvider = new ErrorProvider(components);
             StatusLabel = new Label();
             label1 = new Label();
+            SearchFormButton = new Button();
+            LogOutButton = new Button();
             ((System.ComponentModel.ISupportInitialize)BookDataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
@@ -57,30 +59,30 @@
             // BookDataGrid
             // 
             BookDataGrid.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(238, 239, 249);
-            BookDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(238, 239, 249);
+            BookDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             BookDataGrid.AutoGenerateColumns = false;
             BookDataGrid.BorderStyle = BorderStyle.None;
             BookDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(20, 25, 70);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            BookDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(20, 25, 70);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = Color.WhiteSmoke;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            BookDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             BookDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             BookDataGrid.Columns.AddRange(new DataGridViewColumn[] { BookId, nameDataGridViewTextBoxColumn, publishedYearDataGridViewTextBoxColumn, availabilityDataGridViewCheckBoxColumn, BranchId, btnDelete });
             BookDataGrid.DataSource = bookBindingSource;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.ForestGreen;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            BookDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = Color.ForestGreen;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            BookDataGrid.DefaultCellStyle = dataGridViewCellStyle6;
             BookDataGrid.EnableHeadersVisualStyles = false;
             BookDataGrid.Location = new Point(192, 140);
             BookDataGrid.Name = "BookDataGrid";
@@ -213,11 +215,36 @@
             label1.TabIndex = 9;
             label1.Text = "Filter Book By Branch";
             // 
+            // SearchFormButton
+            // 
+            SearchFormButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SearchFormButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            SearchFormButton.Location = new Point(29, 372);
+            SearchFormButton.Name = "SearchFormButton";
+            SearchFormButton.Size = new Size(131, 46);
+            SearchFormButton.TabIndex = 10;
+            SearchFormButton.Text = "Search Book Name";
+            SearchFormButton.UseVisualStyleBackColor = true;
+            SearchFormButton.Click += SearchFormButton_Click;
+            // 
+            // LogOutButton
+            // 
+            LogOutButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            LogOutButton.Location = new Point(55, 24);
+            LogOutButton.Name = "LogOutButton";
+            LogOutButton.Size = new Size(75, 32);
+            LogOutButton.TabIndex = 11;
+            LogOutButton.Text = "Log out";
+            LogOutButton.UseVisualStyleBackColor = true;
+            LogOutButton.Click += LogOutButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(793, 686);
+            Controls.Add(LogOutButton);
+            Controls.Add(SearchFormButton);
             Controls.Add(label1);
             Controls.Add(StatusLabel);
             Controls.Add(AddBooksButton);
@@ -256,5 +283,7 @@
         private ErrorProvider errorProvider;
         private Label StatusLabel;
         private Label label1;
+        private Button SearchFormButton;
+        private Button LogOutButton;
     }
 }
