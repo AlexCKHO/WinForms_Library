@@ -52,7 +52,7 @@
             // 
             // NameTextBox
             // 
-            NameTextBox.Location = new Point(154, 97);
+            NameTextBox.Location = new Point(160, 193);
             NameTextBox.Name = "NameTextBox";
             NameTextBox.Size = new Size(208, 23);
             NameTextBox.TabIndex = 0;
@@ -60,7 +60,7 @@
             // 
             // DateTextBox
             // 
-            DateTextBox.Location = new Point(154, 142);
+            DateTextBox.Location = new Point(160, 238);
             DateTextBox.Name = "DateTextBox";
             DateTextBox.PlaceholderText = "DD";
             DateTextBox.Size = new Size(56, 23);
@@ -69,7 +69,7 @@
             // 
             // EmailTextBox
             // 
-            EmailTextBox.Location = new Point(154, 186);
+            EmailTextBox.Location = new Point(160, 282);
             EmailTextBox.Name = "EmailTextBox";
             EmailTextBox.Size = new Size(208, 23);
             EmailTextBox.TabIndex = 2;
@@ -77,7 +77,7 @@
             // 
             // PasswordTextBox
             // 
-            PasswordTextBox.Location = new Point(154, 232);
+            PasswordTextBox.Location = new Point(160, 328);
             PasswordTextBox.Name = "PasswordTextBox";
             PasswordTextBox.PasswordChar = '*';
             PasswordTextBox.Size = new Size(208, 23);
@@ -86,7 +86,7 @@
             // 
             // AddressTextBox
             // 
-            AddressTextBox.Location = new Point(521, 95);
+            AddressTextBox.Location = new Point(527, 191);
             AddressTextBox.Name = "AddressTextBox";
             AddressTextBox.Size = new Size(208, 23);
             AddressTextBox.TabIndex = 3;
@@ -96,7 +96,7 @@
             // 
             NameLabel.AutoSize = true;
             NameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            NameLabel.Location = new Point(95, 97);
+            NameLabel.Location = new Point(101, 193);
             NameLabel.Name = "NameLabel";
             NameLabel.Size = new Size(59, 21);
             NameLabel.TabIndex = 6;
@@ -106,7 +106,7 @@
             // 
             AddressLable.AutoSize = true;
             AddressLable.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            AddressLable.Location = new Point(448, 95);
+            AddressLable.Location = new Point(454, 191);
             AddressLable.Name = "AddressLable";
             AddressLable.Size = new Size(73, 21);
             AddressLable.TabIndex = 7;
@@ -116,7 +116,7 @@
             // 
             EmailLabel.AutoSize = true;
             EmailLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            EmailLabel.Location = new Point(95, 186);
+            EmailLabel.Location = new Point(101, 282);
             EmailLabel.Name = "EmailLabel";
             EmailLabel.Size = new Size(59, 21);
             EmailLabel.TabIndex = 8;
@@ -126,7 +126,7 @@
             // 
             DOBLabel.AutoSize = true;
             DOBLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            DOBLabel.Location = new Point(50, 142);
+            DOBLabel.Location = new Point(56, 238);
             DOBLabel.Name = "DOBLabel";
             DOBLabel.Size = new Size(104, 21);
             DOBLabel.TabIndex = 9;
@@ -136,7 +136,7 @@
             // 
             PMBLabel.AutoSize = true;
             PMBLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PMBLabel.Location = new Point(431, 182);
+            PMBLabel.Location = new Point(437, 278);
             PMBLabel.Name = "PMBLabel";
             PMBLabel.Size = new Size(144, 21);
             PMBLabel.TabIndex = 10;
@@ -146,7 +146,7 @@
             // 
             PasswordLable.AutoSize = true;
             PasswordLable.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PasswordLable.Location = new Point(71, 232);
+            PasswordLable.Location = new Point(77, 328);
             PasswordLable.Name = "PasswordLable";
             PasswordLable.Size = new Size(83, 21);
             PasswordLable.TabIndex = 11;
@@ -154,7 +154,7 @@
             // 
             // SubmitButton
             // 
-            SubmitButton.Location = new Point(355, 334);
+            SubmitButton.Location = new Point(361, 430);
             SubmitButton.Name = "SubmitButton";
             SubmitButton.Size = new Size(75, 23);
             SubmitButton.TabIndex = 12;
@@ -164,7 +164,7 @@
             // 
             // MonthTextBox
             // 
-            MonthTextBox.Location = new Point(231, 142);
+            MonthTextBox.Location = new Point(237, 238);
             MonthTextBox.Name = "MonthTextBox";
             MonthTextBox.PlaceholderText = "MM";
             MonthTextBox.Size = new Size(56, 23);
@@ -173,7 +173,7 @@
             // 
             // YearTextBox
             // 
-            YearTextBox.Location = new Point(306, 142);
+            YearTextBox.Location = new Point(312, 238);
             YearTextBox.Name = "YearTextBox";
             YearTextBox.PlaceholderText = "YYYY";
             YearTextBox.Size = new Size(56, 23);
@@ -183,7 +183,7 @@
             // BackToLoginButton
             // 
             BackToLoginButton.ForeColor = Color.Black;
-            BackToLoginButton.Location = new Point(29, 25);
+            BackToLoginButton.Location = new Point(35, 121);
             BackToLoginButton.Name = "BackToLoginButton";
             BackToLoginButton.Size = new Size(75, 23);
             BackToLoginButton.TabIndex = 15;
@@ -200,7 +200,7 @@
             ListOfBranch.DropDownStyle = ComboBoxStyle.DropDownList;
             ListOfBranch.FormattingEnabled = true;
             ListOfBranch.Items.AddRange(new object[] { "HereOne", "HereTwo" });
-            ListOfBranch.Location = new Point(598, 182);
+            ListOfBranch.Location = new Point(604, 278);
             ListOfBranch.Name = "ListOfBranch";
             ListOfBranch.Size = new Size(121, 23);
             ListOfBranch.TabIndex = 16;
@@ -211,7 +211,7 @@
             // 
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            StatusLabel.Location = new Point(248, 25);
+            StatusLabel.Location = new Point(254, 121);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Size = new Size(0, 32);
             StatusLabel.TabIndex = 17;
@@ -221,7 +221,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(793, 686);
             Controls.Add(StatusLabel);
             Controls.Add(ListOfBranch);
             Controls.Add(BackToLoginButton);
@@ -241,6 +241,7 @@
             Controls.Add(NameTextBox);
             Location = new Point(340, 344);
             Name = "SignUpForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "SignUpForm";
             Load += SignUpForm_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();

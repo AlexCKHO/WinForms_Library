@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace EI_Task.Services
+﻿namespace EI_Task.Services
 {
     public  class Validation
     {
@@ -25,7 +18,6 @@ namespace EI_Task.Services
 
             }
             return false;
-
 
         }
 

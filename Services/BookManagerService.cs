@@ -120,38 +120,6 @@ namespace EI_Task.Services
             }
         }
 
-        public async Task<bool> UpdateBookByIdAsync(int bookId, Book updatedBook)
-        {
-            var originalBook = await GetBookByIdAsync(bookId);
-
-            bool originalBookAvailable = originalBook.Availability;
-            bool newBookAvailable = updatedBook.Availability;
-
-            if (originalBookAvailable && !newBookAvailable)
-            {
-               await minusBranchAvailableBook(originalBook.BranchId);
-            }
-            else if(!originalBookAvailable && newBookAvailable)
-            {
-               await addBranchAvailableBook(originalBook.BranchId);
-            }
-
-            try
-            {
-
-                await _bookService.UpdateAsync(bookId, updatedBook);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning($"Failed to update book with ID {bookId}: {ex}");
-                return false;
-            }
-
-           
-            
-        }
-
         public async Task<bool> UpdateBookName(int bookId, string newBookName)
         {
             try

@@ -28,7 +28,7 @@ IBookManagerService bookManagerService
             _userManagerService = userManagerService;
             _bookManagerService = bookManagerService;
             InitializeComponent();
-            
+
         }
 
 

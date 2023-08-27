@@ -43,7 +43,7 @@
             // 
             // TextBoxEmail
             // 
-            TextBoxEmail.Location = new Point(312, 139);
+            TextBoxEmail.Location = new Point(296, 239);
             TextBoxEmail.Name = "TextBoxEmail";
             TextBoxEmail.Size = new Size(216, 23);
             TextBoxEmail.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             TextBoxPW.BackColor = SystemColors.ScrollBar;
             TextBoxPW.BorderStyle = BorderStyle.FixedSingle;
-            TextBoxPW.Location = new Point(312, 200);
+            TextBoxPW.Location = new Point(296, 300);
             TextBoxPW.Name = "TextBoxPW";
             TextBoxPW.PasswordChar = '*';
             TextBoxPW.Size = new Size(216, 23);
@@ -61,7 +61,7 @@
             // 
             // LoginSubmitButton
             // 
-            LoginSubmitButton.Location = new Point(312, 273);
+            LoginSubmitButton.Location = new Point(296, 373);
             LoginSubmitButton.Name = "LoginSubmitButton";
             LoginSubmitButton.Size = new Size(216, 23);
             LoginSubmitButton.TabIndex = 2;
@@ -71,7 +71,7 @@
             // 
             // SignUpFormButton
             // 
-            SignUpFormButton.Location = new Point(312, 328);
+            SignUpFormButton.Location = new Point(296, 428);
             SignUpFormButton.Name = "SignUpFormButton";
             SignUpFormButton.Size = new Size(216, 23);
             SignUpFormButton.TabIndex = 6;
@@ -83,7 +83,7 @@
             // 
             UserNameLabel.AutoSize = true;
             UserNameLabel.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            UserNameLabel.Location = new Point(189, 137);
+            UserNameLabel.Location = new Point(173, 237);
             UserNameLabel.Name = "UserNameLabel";
             UserNameLabel.Size = new Size(117, 25);
             UserNameLabel.TabIndex = 7;
@@ -93,7 +93,7 @@
             // 
             PasswordLabel.AutoSize = true;
             PasswordLabel.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            PasswordLabel.Location = new Point(205, 198);
+            PasswordLabel.Location = new Point(189, 298);
             PasswordLabel.Name = "PasswordLabel";
             PasswordLabel.Size = new Size(101, 25);
             PasswordLabel.TabIndex = 8;
@@ -103,7 +103,7 @@
             // 
             LoginStatusLabel.AutoSize = true;
             LoginStatusLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            LoginStatusLabel.Location = new Point(312, 90);
+            LoginStatusLabel.Location = new Point(296, 190);
             LoginStatusLabel.Name = "LoginStatusLabel";
             LoginStatusLabel.Size = new Size(0, 32);
             LoginStatusLabel.TabIndex = 9;
@@ -113,7 +113,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(793, 686);
             Controls.Add(LoginStatusLabel);
             Controls.Add(PasswordLabel);
             Controls.Add(UserNameLabel);
@@ -123,6 +123,7 @@
             Controls.Add(TextBoxEmail);
             Name = "LoginForm";
             RightToLeftLayout = true;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Please Login";
             Load += LoginForm_Load;
             ResumeLayout(false);

@@ -82,7 +82,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             BookDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             BookDataGrid.EnableHeadersVisualStyles = false;
-            BookDataGrid.Location = new Point(216, 141);
+            BookDataGrid.Location = new Point(192, 140);
             BookDataGrid.Name = "BookDataGrid";
             BookDataGrid.RowTemplate.Height = 25;
             BookDataGrid.Size = new Size(546, 506);
@@ -138,7 +138,7 @@
             // ListOfBranch
             // 
             ListOfBranch.FormattingEnabled = true;
-            ListOfBranch.Location = new Point(53, 165);
+            ListOfBranch.Location = new Point(29, 164);
             ListOfBranch.Name = "ListOfBranch";
             ListOfBranch.Size = new Size(121, 23);
             ListOfBranch.TabIndex = 2;
@@ -146,7 +146,7 @@
             // 
             // NameTextBox
             // 
-            NameTextBox.Location = new Point(237, 88);
+            NameTextBox.Location = new Point(213, 87);
             NameTextBox.Name = "NameTextBox";
             NameTextBox.PlaceholderText = "Name";
             NameTextBox.Size = new Size(89, 23);
@@ -155,7 +155,7 @@
             // 
             // PublishYearTextBox
             // 
-            PublishYearTextBox.Location = new Point(362, 88);
+            PublishYearTextBox.Location = new Point(338, 87);
             PublishYearTextBox.Name = "PublishYearTextBox";
             PublishYearTextBox.PlaceholderText = "Publish Year";
             PublishYearTextBox.Size = new Size(89, 23);
@@ -165,7 +165,7 @@
             // AvailableCheckBox
             // 
             AvailableCheckBox.AutoSize = true;
-            AvailableCheckBox.Location = new Point(472, 90);
+            AvailableCheckBox.Location = new Point(448, 89);
             AvailableCheckBox.Name = "AvailableCheckBox";
             AvailableCheckBox.Size = new Size(74, 19);
             AvailableCheckBox.TabIndex = 5;
@@ -175,14 +175,14 @@
             // LocationList
             // 
             LocationList.FormattingEnabled = true;
-            LocationList.Location = new Point(552, 88);
+            LocationList.Location = new Point(528, 87);
             LocationList.Name = "LocationList";
             LocationList.Size = new Size(89, 23);
             LocationList.TabIndex = 6;
             // 
             // AddBooksButton
             // 
-            AddBooksButton.Location = new Point(671, 88);
+            AddBooksButton.Location = new Point(647, 87);
             AddBooksButton.Name = "AddBooksButton";
             AddBooksButton.Size = new Size(75, 23);
             AddBooksButton.TabIndex = 7;
@@ -198,7 +198,7 @@
             // 
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            StatusLabel.Location = new Point(254, 25);
+            StatusLabel.Location = new Point(230, 24);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Size = new Size(0, 40);
             StatusLabel.TabIndex = 8;
@@ -207,7 +207,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(42, 131);
+            label1.Location = new Point(18, 130);
             label1.Name = "label1";
             label1.Size = new Size(142, 19);
             label1.TabIndex = 9;

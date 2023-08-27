@@ -1,14 +1,8 @@
 ﻿using EI_Task.Models;
 using EI_Task.Services;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace EI_Task
 {
@@ -23,7 +17,7 @@ namespace EI_Task
         {
             _bookManagerService = bookManagerService;
             InitializeComponent();
-           
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -91,7 +85,7 @@ namespace EI_Task
             int rowIndex = e.RowIndex;
             int colIndex = e.ColumnIndex;
 
-            if(rowIndex != -1 )
+            if (rowIndex != -1)
             {
                 _originalValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value.ToString();
             }
@@ -137,7 +131,7 @@ namespace EI_Task
                     {
                         if (Validation.ValidatePublishedYear(newYear))
                         {
-                            await _bookManagerService.UpdateBookYear(bookId,newYear);
+                            await _bookManagerService.UpdateBookYear(bookId, newYear);
                         }
                         else
                         {
@@ -223,9 +217,6 @@ namespace EI_Task
                 errorProvider.SetError(NameTextBox, null);
             }
         }
-
-
-
 
         private void PublishYearTextBox_Validating(object sender, CancelEventArgs e)
         {

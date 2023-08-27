@@ -14,7 +14,6 @@ namespace EI_Task.Services
         Task<List<Book>> GetListOfBookAsync();
         Task DeleteBookAsync(int id);
         Task<Book> GetBookByIdAsync(int id);
-        Task<bool> UpdateBookByIdAsync(int id, Book updatedBook);
         Task<bool> UpdateBookName(int bookId, string newBookName);
         Task<bool> UpdateBookYear(int bookId, int newBookYear);
         Task<bool> UpdateAvailable(int bookId, bool available);
