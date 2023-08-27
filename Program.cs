@@ -1,15 +1,11 @@
 using EI_Task.Data;
 using EI_Task.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Data.Common;
-using System.ComponentModel.Design;
 using EI_Task.Data.Repositories;
 using EI_Task.Services;
-using Microsoft.Extensions.Options;
-using System.Windows.Forms;
+
 
 namespace EI_Task
 {

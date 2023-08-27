@@ -100,7 +100,6 @@ namespace EI_Task
             object newValue = BookDataGrid.Rows[rowIndex].Cells[colIndex].Value;
             string columnName = BookDataGrid.Columns[colIndex].HeaderText;
 
-            // Validate the new value using the Validation class
             if (!_validationService.ValidateCellValue(columnName, newValue))
             {
                 MessageBox.Show("Invalid input.");

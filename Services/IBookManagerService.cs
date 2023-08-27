@@ -1,10 +1,5 @@
 ﻿using EI_Task.Models;
 using EI_Task.Models.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EI_Task.Services
 {

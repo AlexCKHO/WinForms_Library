@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+﻿using System.Text.RegularExpressions;
+
 
 namespace EI_Task.Services
 {
@@ -24,7 +21,6 @@ namespace EI_Task.Services
 
             }
             return false;
-
         }
 
 
@@ -115,7 +111,7 @@ namespace EI_Task.Services
 
         public bool IsValidDate(int day, int month, int year)
         {
-            // Check if year, month and day form a valid date
+
             if (year < 1900 || year > DateTime.Now.Year)
             {
                 return false;
