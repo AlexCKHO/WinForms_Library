@@ -116,11 +116,6 @@ namespace EI_Task
                 return;
             }
 
-            // Find the corresponding book from the data source
-            Book editedBook = new Book();
-
-            editedBook =  await _bookManagerService.GetBookByIdAsync(bookId);
-
             // Update the edited property
             switch (colIndex)
             {
@@ -133,7 +128,7 @@ namespace EI_Task
                     }
                     else
                     {
-                        editedBook.Name = newValue.ToString();
+                        await _bookManagerService.UpdateBookName(bookId, newValue.ToString());
                     }
                     break;
                 case 2:
@@ -142,7 +137,7 @@ namespace EI_Task
                     {
                         if (Validation.ValidatePublishedYear(newYear))
                         {
-                            editedBook.PublishedYear = newYear;
+                            await _bookManagerService.UpdateBookYear(bookId,newYear);
                         }
                         else
                         {
@@ -159,11 +154,11 @@ namespace EI_Task
                     }
                     break;
                 case 3:
-                    editedBook.Availability = (bool)newValue;
+                    await _bookManagerService.UpdateAvailable(bookId, (bool)newValue);
                     break;
             }
+            GetListOfBook();
 
-            await _bookManagerService.UpdateBookByIdAsync(bookId, editedBook);
         }
 
         private async void AddBooksButton_Click(object sender, EventArgs e)

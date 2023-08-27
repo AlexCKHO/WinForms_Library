@@ -147,7 +147,108 @@ namespace EI_Task.Services
                 _logger.LogWarning($"Failed to update book with ID {bookId}: {ex}");
                 return false;
             }
+
+           
             
         }
+
+        public async Task<bool> UpdateBookName(int bookId, string newBookName)
+        {
+            try
+            {
+                // Get the original book from the database
+                var originalBook = await GetBookByIdAsync(bookId);
+
+                // If the book doesn't exist, return false
+                if (originalBook == null)
+                {
+                    _logger.LogWarning($"Failed to find book with ID {bookId}.");
+                    return false;
+                }
+
+                // Update the book's name
+                originalBook.Name = newBookName;
+
+                // Update the book in the database
+                await _bookService.UpdateAsync(bookId, originalBook);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and return false
+                _logger.LogWarning($"Failed to update book name with ID {bookId}: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateBookYear(int bookId, int newBookYear)
+        {
+            try
+            {
+                // Get the original book from the database
+                var originalBook = await GetBookByIdAsync(bookId);
+
+                // If the book doesn't exist, return false
+                if (originalBook == null)
+                {
+                    _logger.LogWarning($"Failed to find book with ID {bookId}.");
+                    return false;
+                }
+
+                // Update the book's name
+                originalBook.PublishedYear = newBookYear;
+
+                // Update the book in the database
+                await _bookService.UpdateAsync(bookId, originalBook);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and return false
+                _logger.LogWarning($"Failed to update book name with ID {bookId}: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAvailable(int bookId, bool available)
+        {
+
+
+            
+            try
+            {
+                var originalBook = await GetBookByIdAsync(bookId);
+
+                if (originalBook == null)
+                {
+                    _logger.LogWarning($"Failed to find book with ID {bookId}.");
+                    return false;
+                }
+
+                if (available)
+                {
+                  await addBranchAvailableBook(originalBook.BranchId);
+                } else
+                {
+                  await minusBranchAvailableBook(originalBook.BranchId);
+                }
+
+                // Update the book's name
+                originalBook.Availability = available;
+
+                // Update the book in the database
+                await _bookService.UpdateAsync(bookId, originalBook);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and return false
+                _logger.LogWarning($"Failed to update book name with ID {bookId}: {ex}");
+                return false;
+            }
+        }
+
+
+
     }
 }
