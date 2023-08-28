@@ -116,7 +116,7 @@ namespace EI_Task.Services
             }
         }
 
-        public async Task<bool> UpdateBookName(int bookId, string newBookName)
+        private async Task<bool> UpdateBookName(int bookId, string newBookName)
         {
             try
             {
@@ -145,7 +145,7 @@ namespace EI_Task.Services
             }
         }
 
-        public async Task<bool> UpdateBookYear(int bookId, int newBookYear)
+        private async Task<bool> UpdateBookYear(int bookId, int newBookYear)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace EI_Task.Services
             }
         }
 
-        public async Task<bool> UpdateAvailable(int bookId, bool available)
+        private async Task<bool> UpdateAvailable(int bookId, bool available)
         {
 
 
