@@ -87,7 +87,6 @@ namespace EI_Task.Services
         public async Task<List<Book>> GetListOfBookAsync()
         {
 
-
            return (await _bookService.GetAllAsync()).ToList();
 
         }
@@ -120,26 +119,26 @@ namespace EI_Task.Services
         {
             try
             {
-                // Get the original book from the database
+
                 var originalBook = await GetBookByIdAsync(bookId);
 
-                // If the book doesn't exist, return false
+
                 if (originalBook == null)
                 {
                     _logger.LogWarning($"Failed to find book with ID {bookId}.");
                     return false;
                 }
 
-                // Update the book's name
+
                 originalBook.Name = newBookName.Trim();
 
-                // Update the book in the database
+
                 await _bookService.UpdateAsync(bookId, originalBook);
                 return true;
             }
             catch (Exception ex)
             {
-                // Log the exception and return false
+
                 _logger.LogWarning($"Failed to update book name with ID {bookId}: {ex}");
                 return false;
             }
@@ -149,26 +148,26 @@ namespace EI_Task.Services
         {
             try
             {
-                // Get the original book from the database
+
                 var originalBook = await GetBookByIdAsync(bookId);
 
-                // If the book doesn't exist, return false
+
                 if (originalBook == null)
                 {
                     _logger.LogWarning($"Failed to find book with ID {bookId}.");
                     return false;
                 }
 
-                // Update the book's name
+
                 originalBook.PublishedYear = newBookYear;
 
-                // Update the book in the database
+
                 await _bookService.UpdateAsync(bookId, originalBook);
                 return true;
             }
             catch (Exception ex)
             {
-                // Log the exception and return false
+
                 _logger.LogWarning($"Failed to update book name with ID {bookId}: {ex}");
                 return false;
             }
